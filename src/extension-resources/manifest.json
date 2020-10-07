@@ -1,0 +1,23 @@
+{
+  "name": "My commands",
+  "version": "0.0.1",
+  "description": "My commands is a tool created for terminal users to store and organize frequently used commands",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "contextMenus"
+  ],
+  "browser_action": {
+      "default_title": "My commands",
+      "default_icon": "icon16.png"
+  },
+  "icons": {
+    "16": "icon16.png"
+  },
+  "background": {
+    "persistent": false,
+    "scripts": ["background.js"]
+  },
+  "manifest_version": 2
+}

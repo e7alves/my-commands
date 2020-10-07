@@ -1,0 +1,21 @@
+{
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "env": {
+    "node": true,
+    "es6": true,
+    "browser": true,
+    "jest": true
+  },
+  "globals": {
+    "chrome": "writable"
+  },
+  "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "import/no-unresolved": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "semi": [2, "never"],
+    "global-require": "off",
+    "arrow-parens": "off"
+  }
+}
