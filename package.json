@@ -28,7 +28,8 @@
     "react-draggable-list": "4.0.3",
     "react-router-dom": "5.2.0",
     "scss": "0.2.4",
-    "string": "3.3.3"
+    "string": "3.3.3",
+    "styled-components": "5.2.0"
   },
   "devDependencies": {
     "@babel/cli": "7.10.5",

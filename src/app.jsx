@@ -1,11 +1,9 @@
-import '@/src/styles/style.scss'
-
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { HashRouter, Route } from 'react-router-dom'
+import { ThemeProvider } from 'styled-components'
 
 import themeLoader from '@/src/theme/themeLoader'
-import ThemeContext from '@/src/theme/ThemeContext'
 import Application from '@/src/containers/Application'
 
 if (process.env.NODE_ENV === 'development') {
@@ -15,9 +13,9 @@ if (process.env.NODE_ENV === 'development') {
 themeLoader().then(theme => {
   ReactDOM.render(
     <HashRouter>
-      <ThemeContext.Provider value={theme}>
+      <ThemeProvider theme={theme}>
         <Route component={Application} />
-      </ThemeContext.Provider>
+      </ThemeProvider>
     </HashRouter>,
     document.getElementById('app'),
   )
