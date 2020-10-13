@@ -1,9 +1,7 @@
 const chrome = {
   storage: {
     local: {
-      get: (keys, callback) => callback({
-        [keys[0]]: 'dark',
-      }),
+      get: (keys, callback) => callback({ [keys[0]]: 'dark' }),
     },
   },
   runtime: {

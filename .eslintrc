@@ -1,21 +1,65 @@
 {
-  "extends": "airbnb",
-  "parser": "babel-eslint",
   "env": {
-    "node": true,
-    "es6": true,
     "browser": true,
-    "jest": true
+    "es2020": true
   },
   "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly",
     "chrome": "writable"
   },
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb",
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "prettier"
+  ],
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "import/no-unresolved": "off",
-    "react/jsx-one-expression-per-line": "off",
-    "semi": [2, "never"],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
     "global-require": "off",
-    "arrow-parens": "off"
+    "prettier/prettier": "error",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "react/jsx-filename-extension": [
+      0,
+      { "extensions": [".js", ".ts", ".tsx"] }
+    ],
+    "comma-dangle": ["error", {
+      "objects": "always-multiline",
+      "arrays": "always-multiline",
+      "imports": "always-multiline",
+      "functions": "always-multiline"
+    }],
+    "@typescript-eslint/no-var-requires": "off",
+    "import/no-unresolved": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".ts", ".tsx"]
+      }
+    }
   }
 }

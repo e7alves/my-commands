@@ -1,9 +1,11 @@
-import themes from '@/src/styles/themes'
+import themes from './themes'
 
 const defaultThemeName = 'dark'
 
-export default () => new Promise(resolve => {
-  chrome.storage.local.get(['themeName'], ({ themeName }) => {
-    resolve(themes[themeName] || themes[defaultThemeName])
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export default () =>
+  new Promise((resolve) => {
+    chrome.storage.local.get(['themeName'], ({ themeName }) => {
+      resolve(themes[themeName] || themes[defaultThemeName])
+    })
   })
-})

@@ -1,13 +1,16 @@
 import { createGlobalStyle } from 'styled-components'
 
+import robotoFont from '../assets/fonts/Roboto-Regular.ttf'
+import courierFont from '../assets/fonts/CourierPrime-Regular.ttf'
+
 const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'Roboto';
-    src: url('../assets/fonts/Roboto-Regular.ttf') format('truetype');
+    src: url(${robotoFont}) format('truetype');
   }
   @font-face {
     font-family: 'Courier_Prime';
-    src: url('../assets/fonts/CourierPrime-Regular.ttf') format('truetype');
+    src: url(${courierFont}) format('truetype');
   }
 
   * {
@@ -17,7 +20,7 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
     font-family: 'Roboto', sans-serif;
-    background-color: ${({ theme }) => theme.background};
+    background-color: #000;
     color: ${({ theme }) => theme.text};
   }
 `

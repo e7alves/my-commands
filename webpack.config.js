@@ -29,9 +29,7 @@ module.exports = () => ({
       './src/assets/index.html',
       path.join(__dirname, packageInfo.browser),
     ],
-    images: [
-      path.join(__dirname, 'src/assets/favicon.png'),
-    ],
+    images: [path.join(__dirname, 'src/assets/favicon.png')],
   },
 
   watchOptions: {
@@ -48,11 +46,9 @@ module.exports = () => ({
   },
 
   resolve: {
-    extensions: ['.js', '.jsx', '.webpack.js', '.web.js'],
-    alias: {
-      '@': __dirname,
-    },
+    extensions: ['.js', '.ts', '.tsx'],
   },
+
   plugins: [
     new Webpack.DefinePlugin({
       'process.env': {
@@ -73,10 +69,13 @@ module.exports = () => ({
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|tsx|ts)$/,
         exclude: /node_modules/,
-        loaders: isEnvProduction ? [babelLoader] : [babelLoader, 'eslint-loader'],
-      }, {
+        loaders: isEnvProduction
+          ? [babelLoader]
+          : [babelLoader, 'eslint-loader'],
+      },
+      {
         test: /\.scss$/,
         loaders: [
           'style-loader',
@@ -84,22 +83,23 @@ module.exports = () => ({
           'postcss-loader',
           'sass-loader',
         ],
-      }, {
+      },
+      {
         test: /envconfig\.json$/,
         loader: ['./conf/propreplace-loader.js'],
-      }, {
-        test: /\.pdf$/,
-        loaders: ['file-loader?name=documents/[name].[ext]'],
-      }, {
-        test: /\.css$/,
-        loaders: ['style-loader', 'css-loader', 'postcss-loader'],
-      }, {
+      },
+      {
         test: /\.html$/,
-        loader: ['file-loader?name=[name].[ext]', './conf/propreplace-loader.js'],
-      }, {
+        loader: [
+          'file-loader?name=[name].[ext]',
+          './conf/propreplace-loader.js',
+        ],
+      },
+      {
         test: /\.(jpg|jpeg|png|svg|gif|ico)(\?v=[0-9].[0-9].[0-9])?$/,
         loader: 'file-loader?name=images/[name].[ext]',
-      }, {
+      },
+      {
         test: /\.(woff|woff2|ttf|eot|otf)(\?v=[0-9].[0-9].[0-9])?$/,
         loader: 'file-loader?name=fonts/[name].[ext]',
       },

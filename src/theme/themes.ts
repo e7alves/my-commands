@@ -1,6 +1,6 @@
 export default {
   dark: {
-    background: '#000',
+    background: '#333F50',
     text: '#fff',
   },
   light: {
