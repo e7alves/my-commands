@@ -7,7 +7,7 @@ import themeLoader from './theme/themeLoader'
 import Application from './containers/Application'
 
 if (process.env.NODE_ENV === 'development') {
-  require('./devConfig')
+  require('./devConfig/devConfig')
 }
 
 themeLoader().then((theme) => {
