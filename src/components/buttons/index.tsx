@@ -6,6 +6,7 @@ import StyledTextBtn from './textBtn/style'
 import StyledSquaredBtn from './squaredBtn/style'
 import StyledSecondaryBtn from './secondaryBtn/style'
 import StyledCancelBtn from './cancelBtn/style'
+import StyledIconBtn from './iconBtn/style'
 import Icon from '../icon/index'
 
 interface Props {
@@ -36,11 +37,7 @@ export const SecondaryBtn = buttonFactory(StyledSecondaryBtn)
 
 export const CancelBtn = buttonFactory(StyledCancelBtn)
 
-// export const PrimaryBtn: React.FC<Props> = ({ style, children, onClick }) => (
-//   <StyledPrimaryBtn style={style} onClick={onClick}>
-//     {children}
-//   </StyledPrimaryBtn>
-// )
+export const IconBtn = buttonFactory(StyledIconBtn)
 
 export const AddCommandBtn: React.FC<Props> = ({ style, onClick }) => (
   <StyledAddCommandBtn style={style} onClick={onClick}>
@@ -48,26 +45,8 @@ export const AddCommandBtn: React.FC<Props> = ({ style, onClick }) => (
   </StyledAddCommandBtn>
 )
 
-// export const TextBtn: React.FC<Props> = ({ style, children, onClick }) => (
-//   <StyledTextBtn style={style} onClick={onClick}>
-//     {children}
-//   </StyledTextBtn>
-// )
-
-// export const SquaredBtn: React.FC<Props> = ({ style, children, onClick }) => (
-//   <StyledSquaredBtn style={style} onClick={onClick}>
-//     {children}
-//   </StyledSquaredBtn>
-// )
-
-// export const SecondaryBtn: React.FC<Props> = ({
-//   style,
-//   children,
-//   onClick,
-//   iconName,
-// }) => (
-//   <StyledSecondaryBtn style={style} onClick={onClick}>
-//     {iconName && <Icon name={iconName} />}
-//     {children}
-//   </StyledSecondaryBtn>
+// export const IconBtn: React.FC<Props> = ({ style, onClick, iconName }) => (
+//   <StyledIconBtn style={style} onClick={onClick}>
+//     <Icon name={iconName} />
+//   </StyledIconBtn>
 // )

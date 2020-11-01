@@ -6,7 +6,7 @@
   "scripts": {
     "build": "NODE_ENV=production webpack --colors -p",
     "dev": "webpack-dev-server --progress --colors --port 8000 --watch",
-    "lint": "eslint ./src --ext .jsx",
+    "lint": "eslint ./src --ext .tsx .ts",
     "pre-commit": "npm run lint"
   },
   "author": {

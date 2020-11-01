@@ -16,3 +16,15 @@ export const Input = css`
     outline: none;
   }
 `
+
+export const HorizInputSection = styled.div`
+  align-items: center;
+  display: flex;
+  &:not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
+  label {
+    width: 2rem;
+    margin-right: 0.5rem;
+  }
+`

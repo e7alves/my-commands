@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import CopyToClipboard from 'react-copy-to-clipboard'
 
-import { Command } from '../../../dataTypes'
+import { Command } from '../../../data/dataTypes'
 
 import {
   Wrapper,

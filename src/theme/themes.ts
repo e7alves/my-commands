@@ -16,6 +16,8 @@ export default {
     secondaryButtonBtn: '#0069B8',
     actionButtonBg: '#6a8ed2',
     cancelButtonBg: '#8FAADC',
+    listBg: '#3C4B5E',
+    dangerColor: '#e39c9c',
   },
   light: {
     background: '#fff',

@@ -1,11 +1,5 @@
 import styled from 'styled-components'
 
-export const MainContainer = styled.div`
-  margin: 0 auto;
-  max-width: 400px;
-  background-color: ${({ theme }) => theme.background};
-`
-
 interface AlignedContainerProps {
   position: 'center' | 'right' | 'left'
 }
@@ -25,3 +19,5 @@ export const AlignedContainer = styled.div<AlignedContainerProps>`
   display: flex;
   justify-content: ${({ position }) => getAlignByPosition(position)};
 `
+
+export const noop = null

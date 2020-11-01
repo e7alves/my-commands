@@ -1,22 +1,34 @@
 import React from 'react'
 
-import NavbarContainer from './style'
+import { NavbarContainer, NavbarButton, NavbarLink } from './style'
 import Icon from '../icon/index'
 
 const Navbar: React.FC = () => (
   <NavbarContainer>
     <ul>
       <li>
-        <Icon name="cog" />
-        Settings
+        <NavbarLink to="/">
+          <Icon name="format-list-bulleted" />
+          Tasks
+        </NavbarLink>
       </li>
       <li>
-        <Icon name="plus" />
-        Add
+        <NavbarButton>
+          <Icon name="plus" />
+          Task
+        </NavbarButton>
       </li>
       <li>
-        <Icon name="format-list-bulleted" />
-        Tasks
+        <NavbarButton>
+          <Icon name="plus" />
+          Topic
+        </NavbarButton>
+      </li>
+      <li>
+        <NavbarLink to="/">
+          <Icon name="cog" />
+          Settings
+        </NavbarLink>
       </li>
     </ul>
   </NavbarContainer>

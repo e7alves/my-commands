@@ -1,7 +1,7 @@
 import React from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
-import { Command } from '../../dataTypes'
+import { Command } from '../../data/dataTypes'
 
 import { CommandList, CommandListItem } from './style'
 import CommandDescription from './commandDescription'

@@ -19,5 +19,7 @@ declare module 'styled-components' {
     secondaryButtonBtn: string
     actionButtonBg: string
     cancelButtonBg: string
+    listBg: string
+    dangerColor: string
   }
 }

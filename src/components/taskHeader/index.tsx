@@ -1,8 +1,9 @@
 import React, { useMemo } from 'react'
 
-import { TaskInfo, Topic } from '../../dataTypes'
+import { TaskInfo, Topic } from '../../data/dataTypes'
 
-import { Container, InnerContainer, Section } from './style'
+import { Container, InnerContainer } from './style'
+import { HorizInputSection } from '../inputs/style'
 import TextField from '../inputs/textField'
 import SelectBox from '../inputs/selectBox'
 import Label from '../inputs/label'
@@ -22,11 +23,7 @@ const TaskHeader: React.FC<Props> = ({
   setTaskInfo,
 }) => {
   function renderLabel(text: string, htmlFor?: string) {
-    return (
-      <Label style={{ width: '2rem', marginRight: '0.5rem' }} htmlFor={htmlFor}>
-        {text}
-      </Label>
-    )
+    return <Label htmlFor={htmlFor}>{text}</Label>
   }
 
   const { topicId, name, link } = taskInfo
@@ -55,7 +52,7 @@ const TaskHeader: React.FC<Props> = ({
       <InnerContainer>
         {editMode ? (
           <>
-            <Section>
+            <HorizInputSection>
               {renderLabel('Topic', 'topic')}
               <SelectBox
                 id="topic"
@@ -63,8 +60,8 @@ const TaskHeader: React.FC<Props> = ({
                 value={`${topicId}`}
                 onChange={onSelectChange}
               />
-            </Section>
-            <Section>
+            </HorizInputSection>
+            <HorizInputSection>
               {renderLabel('Task', 'task')}
               <TextField
                 id="task"
@@ -72,8 +69,8 @@ const TaskHeader: React.FC<Props> = ({
                 value={name}
                 onChange={onTextChange}
               />
-            </Section>
-            <Section>
+            </HorizInputSection>
+            <HorizInputSection>
               {renderLabel('Link', 'link')}
               <TextField
                 id="link"
@@ -81,25 +78,25 @@ const TaskHeader: React.FC<Props> = ({
                 value={link}
                 onChange={onTextChange}
               />
-            </Section>
+            </HorizInputSection>
           </>
         ) : (
           <>
-            <Section>
+            <HorizInputSection>
               {renderLabel('Topic')}
               <p>{topicName}</p>
-            </Section>
-            <Section>
+            </HorizInputSection>
+            <HorizInputSection>
               {renderLabel('Task')}
               <p>{name}</p>
-            </Section>
+            </HorizInputSection>
             {link && (
-              <Section>
+              <HorizInputSection>
                 {renderLabel('Link')}
                 <Link to={link}>
                   {link.length > 37 ? `${link.slice(0, 37)}...` : link}
                 </Link>
-              </Section>
+              </HorizInputSection>
             )}
           </>
         )}

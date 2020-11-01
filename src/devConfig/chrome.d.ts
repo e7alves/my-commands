@@ -1,5 +1,3 @@
-import { Topic, Task } from '../dataTypes'
-
 interface StorageResult {
   [value: string]: any
 }

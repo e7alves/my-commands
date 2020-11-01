@@ -2,7 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
 
-import { Command, TaskInfo, Task as TaskType, Topic } from '../../dataTypes'
+import {
+  Command,
+  TaskInfo,
+  Task as TaskType,
+  Topic,
+} from '../../data/dataTypes'
+import { getTask } from '../../data/storage'
 
 import { Container, Section } from './style'
 import TaskHeader from '../../components/taskHeader'
@@ -45,8 +51,7 @@ const Task: React.FC = () => {
   useEffect(() => {
     if (taskId) {
       const key = `t${taskId}`
-      chrome.storage.local.get([key], (result) => {
-        const task = result[key]
+      getTask(key, (task) => {
         setTask(task)
         setTaskInfoCopy(getTaskInfo(task))
         setCommandsCopy(task.commands)

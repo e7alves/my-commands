@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import { Command } from '../../../dataTypes'
+import { Command } from '../../../data/dataTypes'
 
 import { Wrapper, EditableDescription, StaticDescription } from './style'
 import { TextBtn } from '../../buttons/index'
