@@ -38,6 +38,12 @@ function onWindowOpenedOrClosedHandler(onWindowClosed, onWindowOpened) {
  });
 }
 
+chrome.storage.local.set({ t1: 'task 1' })
+chrome.storage.local.set({ t2: 'task 2' })
+chrome.storage.local.get(['t1', 't2'], (result) => {
+  console.log(result);
+});
+
 chrome.runtime.onMessage.addListener((request) => {
   if (request.eventName === 'command-copied') {
     console.log(request.command)

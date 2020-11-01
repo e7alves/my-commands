@@ -1,13 +1,12 @@
+import { Topic, Task } from '../dataTypes'
+
 interface StorageResult {
-  [value: string]: string
+  [value: string]: any
 }
 
 interface FakeStorage {
   local: {
-    get: (
-      keys: string[],
-      cb: (key: StorageResult) => StorageResult | void,
-    ) => StorageResult
+    get: (keys: string[], cb: (key: StorageResult) => void) => void
   }
 }
 

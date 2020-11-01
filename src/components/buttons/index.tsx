@@ -1,0 +1,73 @@
+import React from 'react'
+
+import StyledPrimaryBtn from './primaryBtn/style'
+import StyledAddCommandBtn from './addCommandBtn/style'
+import StyledTextBtn from './textBtn/style'
+import StyledSquaredBtn from './squaredBtn/style'
+import StyledSecondaryBtn from './secondaryBtn/style'
+import StyledCancelBtn from './cancelBtn/style'
+import Icon from '../icon/index'
+
+interface Props {
+  style?: React.CSSProperties
+  children?: React.ReactNode
+  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => unknown
+  iconName?: string
+}
+
+const buttonFactory: (unknow) => React.FC<Props> = (
+  Component: new () => React.Component<Props>,
+) => {
+  return ({ children, iconName, ...rest }) => (
+    <Component {...rest}>
+      {iconName && <Icon name={iconName} />}
+      {children}
+    </Component>
+  )
+}
+
+export const PrimaryBtn = buttonFactory(StyledPrimaryBtn)
+
+export const TextBtn = buttonFactory(StyledTextBtn)
+
+export const SquaredBtn = buttonFactory(StyledSquaredBtn)
+
+export const SecondaryBtn = buttonFactory(StyledSecondaryBtn)
+
+export const CancelBtn = buttonFactory(StyledCancelBtn)
+
+// export const PrimaryBtn: React.FC<Props> = ({ style, children, onClick }) => (
+//   <StyledPrimaryBtn style={style} onClick={onClick}>
+//     {children}
+//   </StyledPrimaryBtn>
+// )
+
+export const AddCommandBtn: React.FC<Props> = ({ style, onClick }) => (
+  <StyledAddCommandBtn style={style} onClick={onClick}>
+    <Icon name="plus" />
+  </StyledAddCommandBtn>
+)
+
+// export const TextBtn: React.FC<Props> = ({ style, children, onClick }) => (
+//   <StyledTextBtn style={style} onClick={onClick}>
+//     {children}
+//   </StyledTextBtn>
+// )
+
+// export const SquaredBtn: React.FC<Props> = ({ style, children, onClick }) => (
+//   <StyledSquaredBtn style={style} onClick={onClick}>
+//     {children}
+//   </StyledSquaredBtn>
+// )
+
+// export const SecondaryBtn: React.FC<Props> = ({
+//   style,
+//   children,
+//   onClick,
+//   iconName,
+// }) => (
+//   <StyledSecondaryBtn style={style} onClick={onClick}>
+//     {iconName && <Icon name={iconName} />}
+//     {children}
+//   </StyledSecondaryBtn>
+// )

@@ -8,10 +8,6 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Roboto';
     src: url(${robotoFont}) format('truetype');
   }
-  @font-face {
-    font-family: 'Courier_Prime';
-    src: url(${courierFont}) format('truetype');
-  }
 
   * {
     padding: 0;
@@ -22,6 +18,16 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Roboto', sans-serif;
     background-color: #000;
     color: ${({ theme }) => theme.text};
+  }
+  button {
+    border: none;
+    :hover {
+      cursor: pointer;
+    }
+    &:active,
+    &:focus {
+      outline: none;
+    }
   }
 `
 export default GlobalStyle
