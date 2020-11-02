@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from 'react'
 import { Switch, Route } from 'react-router-dom'
 
@@ -13,7 +14,12 @@ import AppContainer from './style'
 
 const Application: React.FC<null> = () => {
   const [topics, setTopics] = useState<Topic[]>([])
-  useEffect(() => listTopics(setTopics), [])
+
+  function refreshTopics() {
+    listTopics((newTopics) => setTopics([...newTopics]))
+  }
+
+  useEffect(refreshTopics, [])
 
   return (
     <AppContainer>
@@ -23,9 +29,11 @@ const Application: React.FC<null> = () => {
         <Route
           path="/"
           exact
-          component={(props) => <Tasks {...props} topics={topics} />}
+          component={(props) => (
+            <Tasks {...props} topics={topics} refreshTopics={refreshTopics} />
+          )}
         />
-        <Route path="/task/:taskId" exact component={Task} />
+        <Route path="/task/:taskId?" exact component={Task} />
       </Switch>
     </AppContainer>
   )

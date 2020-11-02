@@ -1,37 +1,41 @@
 import React from 'react'
 
-import { NavbarContainer, NavbarButton, NavbarLink } from './style'
+import StyledNavbar from './style'
+import { LinkButton } from '../links'
 import Icon from '../icon/index'
+import { TransparentBtn } from '../buttons'
+
+const fontSize = '12px'
 
 const Navbar: React.FC = () => (
-  <NavbarContainer>
+  <StyledNavbar>
     <ul>
       <li>
-        <NavbarLink to="/">
+        <LinkButton to="/" style={{ fontSize }}>
           <Icon name="format-list-bulleted" />
           Tasks
-        </NavbarLink>
+        </LinkButton>
       </li>
       <li>
-        <NavbarButton>
+        <TransparentBtn style={{ fontSize }}>
           <Icon name="plus" />
           Task
-        </NavbarButton>
+        </TransparentBtn>
       </li>
       <li>
-        <NavbarButton>
+        <TransparentBtn style={{ fontSize }}>
           <Icon name="plus" />
           Topic
-        </NavbarButton>
+        </TransparentBtn>
       </li>
       <li>
-        <NavbarLink to="/">
+        <LinkButton to="/" style={{ fontSize }}>
           <Icon name="cog" />
           Settings
-        </NavbarLink>
+        </LinkButton>
       </li>
     </ul>
-  </NavbarContainer>
+  </StyledNavbar>
 )
 
 export default Navbar

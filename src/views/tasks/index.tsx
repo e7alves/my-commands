@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { DefaultTheme, withTheme } from 'styled-components'
 
+import { deleteTask, updateTopic } from '../../data/storage'
 import { Topic, TaskToSelect } from '../../data/dataTypes'
 import TOPIC_DEFAULT_ID from '../../consts'
 
@@ -8,57 +8,74 @@ import { Container } from './style'
 import { HorizInputSection } from '../../components/inputs/style'
 import TaskList from '../../components/taskList'
 import Label from '../../components/inputs/label'
-import { SquaredBtn } from '../../components/buttons'
-import Icon from '../../components/icon'
 import SelectBox from '../../components/inputs/selectBox'
+import ConfirmModal from '../../components/modal/confirmModal'
 
 interface Props {
   topics: Topic[]
+  refreshTopics: () => void
   tasks: TaskToSelect[]
-  theme: DefaultTheme
 }
 
-const Tasks: React.FC<Props> = ({ theme, topics }) => {
-  const [selectedTopicId, setSelectedTopicId] = useState<string>(
-    TOPIC_DEFAULT_ID,
-  )
-  const [tasks, setTasks] = useState<TaskToSelect[]>([])
+const Tasks: React.FC<Props> = ({ topics, refreshTopics }) => {
+  const [selectedTopicId, setSelectedTopicId] = useState<string>('2')
+  const [tasks, setTasks] = useState<TaskToSelect[]>(null)
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
+  const [taskToDelete, setTaskToDelete] = useState<TaskToSelect>(null)
 
   function onSelectChange(e: React.FormEvent<HTMLSelectElement>) {
     const topicId = e.currentTarget.value
     setSelectedTopicId(topicId)
-    const { tasks } = topics.find(({ id }) => id === topicId)
-    setTasks(tasks)
   }
 
+  useEffect(() => {
+    const topic = topics.find(({ id }) => id === selectedTopicId)
+    topic && setTasks(topic.tasks)
+  }, [selectedTopicId, topics])
+
   function onDeleteTask(idx: number) {
-    const taskToDelete = tasks[idx]
-    alert(`Você quer deletar a task: ${taskToDelete.name}`)
+    setTaskToDelete(tasks[idx])
+    setModalIsOpen(true)
+  }
+
+  function onConfirmDeketeTask() {
+    const { id } = taskToDelete
+    const topic = topics.find(({ id }) => id === selectedTopicId)
+    const updatedTopic = {
+      ...topic,
+      tasks: topic.tasks.filter((task) => task.id !== id),
+    }
+    deleteTask(id, () => {
+      updateTopic(updatedTopic, () => {
+        setModalIsOpen(false)
+        refreshTopics()
+      })
+    })
   }
 
   return (
-    <Container>
-      <HorizInputSection>
-        <Label>Topics</Label>
-        <SelectBox
-          id="topic"
-          options={topics}
-          value={`${selectedTopicId}`}
-          onChange={onSelectChange}
-        />
-      </HorizInputSection>
-      <Label>Tasks</Label>
-      <SquaredBtn
-        style={{
-          backgroundColor: theme.secondaryButtonBtn,
-          marginLeft: '10px',
-        }}
-      >
-        <Icon name="plus" />
-      </SquaredBtn>
-      <TaskList tasks={tasks} onDelete={onDeleteTask} />
-    </Container>
+    <>
+      <ConfirmModal
+        isOpen={modalIsOpen}
+        close={() => setModalIsOpen(false)}
+        title="Are you sure you want to delete this task:"
+        content={taskToDelete && taskToDelete.name}
+        onConfirm={onConfirmDeketeTask}
+      />
+      <Container>
+        <HorizInputSection>
+          <Label>Topics</Label>
+          <SelectBox
+            id="topic"
+            options={topics}
+            value={`${selectedTopicId}`}
+            onChange={onSelectChange}
+          />
+        </HorizInputSection>
+        <TaskList tasks={tasks} onDelete={onDeleteTask} />
+      </Container>
+    </>
   )
 }
 
-export default withTheme(Tasks)
+export default Tasks

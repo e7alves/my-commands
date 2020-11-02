@@ -7,7 +7,7 @@ import { HorizInputSection } from '../inputs/style'
 import TextField from '../inputs/textField'
 import SelectBox from '../inputs/selectBox'
 import Label from '../inputs/label'
-import Link from '../link'
+import { Link } from '../links'
 
 interface Props {
   editMode: boolean

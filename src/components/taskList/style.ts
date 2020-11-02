@@ -2,11 +2,11 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { lighten } from 'polished'
 
-export const StyledTopicList = styled.ul`
+export const StyledTaskList = styled.ul`
   margin-top: 0.3rem;
 `
 
-export const TopicListItem = styled.li`
+export const TaskListItem = styled.li`
   background-color: ${({ theme }) => theme.listBg};
   border: 2px solid ${({ theme }) => lighten(0.1, theme.listBg)};
   list-style: none;
@@ -18,7 +18,7 @@ export const TopicListItem = styled.li`
   }
 `
 
-export const TopicListLink = styled(Link)`
+export const TaskListLink = styled(Link)`
   color: ${({ theme }) => theme.text};
   display: flex;
   font-size: 14px;

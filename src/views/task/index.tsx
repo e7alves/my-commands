@@ -9,6 +9,7 @@ import {
   Topic,
 } from '../../data/dataTypes'
 import { getTask } from '../../data/storage'
+import TOPIC_DEFAULT_ID from '../../consts'
 
 import { Container, Section } from './style'
 import TaskHeader from '../../components/taskHeader'
@@ -24,8 +25,14 @@ const taskDefault = {
   id: '',
   name: '',
   link: '',
-  topicId: '1',
+  topicId: TOPIC_DEFAULT_ID,
   commands: [],
+}
+
+const taskInfoDefault = {
+  name: '',
+  link: '',
+  topicId: TOPIC_DEFAULT_ID,
 }
 
 const getTaskInfo = (task) => {
@@ -40,7 +47,7 @@ const Task: React.FC = () => {
   const [topics, setTopics] = useState<Topic[]>(null)
   const [task, setTask] = useState<TaskType>(taskDefault)
   const [commandsCopy, setCommandsCopy] = useState<Command[]>([])
-  const [taskInfoCopy, setTaskInfoCopy] = useState<TaskInfo>()
+  const [taskInfoCopy, setTaskInfoCopy] = useState<TaskInfo>(taskInfoDefault)
 
   useEffect(() => {
     chrome.storage.local.get(['topics'], (result) => {
@@ -50,8 +57,7 @@ const Task: React.FC = () => {
 
   useEffect(() => {
     if (taskId) {
-      const key = `t${taskId}`
-      getTask(key, (task) => {
+      getTask(taskId, (task) => {
         setTask(task)
         setTaskInfoCopy(getTaskInfo(task))
         setCommandsCopy(task.commands)

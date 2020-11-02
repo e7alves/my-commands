@@ -21,6 +21,7 @@ const GlobalStyle = createGlobalStyle`
   }
   button {
     border: none;
+    font-family: 'Roboto', sans-serif !important;
     :hover {
       cursor: pointer;
     }

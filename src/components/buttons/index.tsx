@@ -7,6 +7,7 @@ import StyledSquaredBtn from './squaredBtn/style'
 import StyledSecondaryBtn from './secondaryBtn/style'
 import StyledCancelBtn from './cancelBtn/style'
 import StyledIconBtn from './iconBtn/style'
+import StyledTransparentBtn from './transparentBtn/style'
 import Icon from '../icon/index'
 
 interface Props {
@@ -39,14 +40,10 @@ export const CancelBtn = buttonFactory(StyledCancelBtn)
 
 export const IconBtn = buttonFactory(StyledIconBtn)
 
+export const TransparentBtn = buttonFactory(StyledTransparentBtn)
+
 export const AddCommandBtn: React.FC<Props> = ({ style, onClick }) => (
   <StyledAddCommandBtn style={style} onClick={onClick}>
     <Icon name="plus" />
   </StyledAddCommandBtn>
 )
-
-// export const IconBtn: React.FC<Props> = ({ style, onClick, iconName }) => (
-//   <StyledIconBtn style={style} onClick={onClick}>
-//     <Icon name={iconName} />
-//   </StyledIconBtn>
-// )

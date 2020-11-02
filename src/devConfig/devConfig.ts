@@ -1,4 +1,4 @@
-import { StorageResult } from './chrome.d'
+import './chrome.d'
 
 const fakeStorage = {
   topics: [
@@ -12,11 +12,11 @@ const fakeStorage = {
       name: 'Linux',
       tasks: [
         {
-          id: 1,
+          id: 't1',
           name: 'How to install nano editor',
         },
         {
-          id: 2,
+          id: 't2',
           name: 'How to list users in linux',
         },
       ],
@@ -28,7 +28,7 @@ const fakeStorage = {
     },
   ],
   t1: {
-    id: '1',
+    id: 't1',
     name: 'How to install nano editor',
     link:
       'https://tecnstuff.net/how-to-install-and-use-nano-text-editor-in-linux/',
@@ -49,7 +49,7 @@ const fakeStorage = {
     ],
   },
   t2: {
-    id: '2',
+    id: 't2',
     name: 'How to list users in linux',
     link: 'linuxize.com',
     topicId: '2',
@@ -61,11 +61,19 @@ global.chrome = {
   storage: {
     local: {
       get: (keys: string[], callback: (result: StorageResult) => void) => {
+        console.log(fakeStorage)
         const result = {}
         keys.forEach((key) => {
           result[key] = fakeStorage[key]
         })
         callback(result)
+      },
+      set: (obj, callback) => {
+        const key = Object.keys(obj)[0]
+        const value = Object.values(obj)[0]
+        console.log(key, value)
+        fakeStorage[key] = value
+        callback && callback()
       },
     },
   },

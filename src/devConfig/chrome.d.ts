@@ -5,6 +5,7 @@ interface StorageResult {
 interface FakeStorage {
   local: {
     get: (keys: string[], cb: (key: StorageResult) => void) => void
+    set: (obj: Record<string, unknown>, callback: () => void) => void
   }
 }
 
