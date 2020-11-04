@@ -22,12 +22,12 @@ export const listTasks = (
   })
 }
 
-export const updateTopic = (newTopic: Topic, callback: () => void) => {
+export const updateTopic = (newTopic: Topic, callback?: () => void) => {
   const { id } = newTopic
   listTopics((topics) => {
     const indexToUpdate = topics.findIndex((topic) => topic.id === id)
     const topicToUpdate = { ...topics[indexToUpdate] }
-    topics.splice(indexToUpdate, indexToUpdate, {
+    topics.splice(indexToUpdate, 1, {
       ...topicToUpdate,
       ...newTopic,
     })
@@ -35,6 +35,25 @@ export const updateTopic = (newTopic: Topic, callback: () => void) => {
   })
 }
 
-export const deleteTask = (taskId: string, callback: () => void) => {
+export const deleteTask = (taskId: string, callback?: () => void) => {
   chrome.storage.local.set({ [taskId]: null }, callback)
+}
+
+export const deleteTopic = (topicId: string, callback: () => void) => {
+  listTopics((topics) => {
+    const topicToDelete = topics.find((topic) => topic.id === topicId)
+    const { tasks } = topicToDelete
+    tasks.forEach(({ id }) => deleteTask(id))
+    chrome.storage.local.set(
+      { topics: topics.filter(({ id }) => id !== topicId) },
+      callback,
+    )
+  })
+}
+
+export const createTopic = (topic: Topic, callback?: () => void) => {
+  listTopics((topics) => {
+    topics.push(topic)
+    chrome.storage.local.set({ topics }, callback)
+  })
 }

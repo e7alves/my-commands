@@ -18,6 +18,7 @@ export default {
     cancelButtonBg: '#8FAADC',
     listBg: '#3C4B5E',
     dangerColor: '#e39c9c',
+    warnColor: '#b2a63b',
   },
   light: {
     background: '#fff',

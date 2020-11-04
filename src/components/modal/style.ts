@@ -6,4 +6,7 @@ export const ModalTitle = styled.h2`
   font-weight: normal;
 `
 
-export const noop = null
+export const ButtonsPanel = styled.div`
+  display: flex;
+  justify-content: space-around;
+`

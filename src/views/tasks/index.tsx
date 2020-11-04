@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 
 import { deleteTask, updateTopic } from '../../data/storage'
 import { Topic, TaskToSelect } from '../../data/dataTypes'
@@ -6,10 +7,14 @@ import TOPIC_DEFAULT_ID from '../../consts'
 
 import { Container } from './style'
 import { HorizInputSection } from '../../components/inputs/style'
-import TaskList from '../../components/taskList'
+import TaskList from '../../components/lists/taskList'
 import Label from '../../components/inputs/label'
 import SelectBox from '../../components/inputs/selectBox'
 import ConfirmModal from '../../components/modal/confirmModal'
+
+interface TopicParam {
+  topicId: string
+}
 
 interface Props {
   topics: Topic[]
@@ -18,7 +23,9 @@ interface Props {
 }
 
 const Tasks: React.FC<Props> = ({ topics, refreshTopics }) => {
-  const [selectedTopicId, setSelectedTopicId] = useState<string>('2')
+  const { topicId } = useParams<TopicParam>()
+
+  const [selectedTopicId, setSelectedTopicId] = useState<string>(topicId || '2')
   const [tasks, setTasks] = useState<TaskToSelect[]>(null)
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
   const [taskToDelete, setTaskToDelete] = useState<TaskToSelect>(null)
@@ -38,7 +45,7 @@ const Tasks: React.FC<Props> = ({ topics, refreshTopics }) => {
     setModalIsOpen(true)
   }
 
-  function onConfirmDeketeTask() {
+  function onConfirmDeleteTask() {
     const { id } = taskToDelete
     const topic = topics.find(({ id }) => id === selectedTopicId)
     const updatedTopic = {
@@ -60,7 +67,7 @@ const Tasks: React.FC<Props> = ({ topics, refreshTopics }) => {
         close={() => setModalIsOpen(false)}
         title="Are you sure you want to delete this task:"
         content={taskToDelete && taskToDelete.name}
-        onConfirm={onConfirmDeketeTask}
+        onConfirm={onConfirmDeleteTask}
       />
       <Container>
         <HorizInputSection>
@@ -72,7 +79,7 @@ const Tasks: React.FC<Props> = ({ topics, refreshTopics }) => {
             onChange={onSelectChange}
           />
         </HorizInputSection>
-        <TaskList tasks={tasks} onDelete={onDeleteTask} />
+        <TaskList tasks={tasks} title="Tasks" onDelete={onDeleteTask} />
       </Container>
     </>
   )

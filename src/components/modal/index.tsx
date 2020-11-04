@@ -23,9 +23,9 @@ const modalStyle: React.CSSProperties = {
   height: '100px',
   padding: '10px',
   position: 'static',
-  margin: '20% 0 0 0',
+  margin: '15% 0 0 0',
   transform: 'none',
-  width: '30%',
+  width: '325px',
 }
 
 ReactModal.defaultStyles.overlay = overlayStyle

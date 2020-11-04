@@ -1,7 +1,8 @@
 import React from 'react'
 
 import Modal from '..'
-import { ModalContent, ButtonsPanel, ConfirmText } from './style'
+import { ModalContent, ConfirmText } from './style'
+import { ButtonsPanel } from '../style'
 import { PrimaryBtn, CancelBtn } from '../../buttons'
 
 interface Props {

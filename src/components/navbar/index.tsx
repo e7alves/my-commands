@@ -11,9 +11,15 @@ const Navbar: React.FC = () => (
   <StyledNavbar>
     <ul>
       <li>
-        <LinkButton to="/" style={{ fontSize }}>
+        <LinkButton to="/tasks" style={{ fontSize }}>
           <Icon name="format-list-bulleted" />
           Tasks
+        </LinkButton>
+      </li>
+      <li>
+        <LinkButton to="/topics" style={{ fontSize }}>
+          <Icon name="format-list-bulleted" />
+          Topics
         </LinkButton>
       </li>
       <li>

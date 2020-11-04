@@ -8,6 +8,7 @@ import { listTopics } from '../../data/storage'
 import Navbar from '../../components/navbar/index'
 import Task from '../../views/task/index'
 import Tasks from '../../views/tasks'
+import Topics from '../../views/topics'
 
 import GlobalStyle from '../../styles/GlobalStyle'
 import AppContainer from './style'
@@ -27,7 +28,14 @@ const Application: React.FC<null> = () => {
       <Navbar />
       <Switch>
         <Route
-          path="/"
+          path="/topics"
+          exact
+          component={(props) => (
+            <Topics {...props} topics={topics} refreshTopics={refreshTopics} />
+          )}
+        />
+        <Route
+          path="/tasks/:topicId?"
           exact
           component={(props) => (
             <Tasks {...props} topics={topics} refreshTopics={refreshTopics} />

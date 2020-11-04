@@ -21,5 +21,6 @@ declare module 'styled-components' {
     cancelButtonBg: string
     listBg: string
     dangerColor: string
+    warnColor: string
   }
 }
