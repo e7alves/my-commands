@@ -7,7 +7,6 @@ export const ModalContent = styled.div`
   justify-content: space-between;
 `
 
-export const ConfirmText = styled.p`
-  font-size: 12px;
+export const TextFieldWrapper = styled.div`
   margin-top: 10px;
 `

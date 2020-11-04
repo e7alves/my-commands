@@ -7,7 +7,11 @@ import { TransparentBtn } from '../buttons'
 
 const fontSize = '12px'
 
-const Navbar: React.FC = () => (
+interface Props {
+  openAddTopicModal: () => void
+}
+
+const Navbar: React.FC<Props> = ({ openAddTopicModal }) => (
   <StyledNavbar>
     <ul>
       <li>
@@ -23,13 +27,13 @@ const Navbar: React.FC = () => (
         </LinkButton>
       </li>
       <li>
-        <TransparentBtn style={{ fontSize }}>
+        <LinkButton to="/task" style={{ fontSize }}>
           <Icon name="plus" />
           Task
-        </TransparentBtn>
+        </LinkButton>
       </li>
       <li>
-        <TransparentBtn style={{ fontSize }}>
+        <TransparentBtn style={{ fontSize }} onClick={openAddTopicModal}>
           <Icon name="plus" />
           Topic
         </TransparentBtn>

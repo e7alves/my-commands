@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { v4 as uuidv4 } from 'uuid'
 
 import { updateTopic, deleteTopic, createTopic } from '../../data/storage'
 import { Topic, TaskToSelect } from '../../data/dataTypes'
@@ -13,14 +12,18 @@ interface Props {
   topics: Topic[]
   refreshTopics: () => void
   tasks: TaskToSelect[]
+  openAddTopicModal: () => void
 }
 
-const Topics: React.FC<Props> = ({ topics, refreshTopics }) => {
+const Topics: React.FC<Props> = ({
+  topics,
+  refreshTopics,
+  openAddTopicModal,
+}) => {
   const [confirmModalIsOpen, setConfirmModalIsOpen] = useState<boolean>(false)
-  const [addAndEditTopicModalIsOpen, setAddAndEditTopicModalIsOpen] = useState<
-    boolean
-  >(false)
-  const [editingTopic, setEditingTopic] = useState<boolean>()
+  const [editTopicModalIsOpen, setEditTopicModalIsOpen] = useState<boolean>(
+    false,
+  )
   const [selectedTopic, setSelectedTopic] = useState<Topic>(null)
 
   function onDeleteTopic(idx: number) {
@@ -29,14 +32,8 @@ const Topics: React.FC<Props> = ({ topics, refreshTopics }) => {
   }
 
   function onEditTopic(idx: number) {
-    setEditingTopic(true)
     setSelectedTopic(topics[idx])
-    setAddAndEditTopicModalIsOpen(true)
-  }
-
-  function onAddTopic() {
-    setEditingTopic(false)
-    setAddAndEditTopicModalIsOpen(true)
+    setEditTopicModalIsOpen(true)
   }
 
   function onConfirmDeleteTopic() {
@@ -45,23 +42,12 @@ const Topics: React.FC<Props> = ({ topics, refreshTopics }) => {
   }
 
   function onConfirmEditOrAddTopic(newTopicName: string) {
-    if (editingTopic) {
-      const updatedTopic = {
-        ...selectedTopic,
-        name: newTopicName,
-      }
-      updateTopic(updatedTopic, refreshTopics)
-      setConfirmModalIsOpen(false)
-    } else {
-      createTopic(
-        {
-          id: uuidv4(),
-          name: newTopicName,
-          tasks: [],
-        },
-        refreshTopics,
-      )
+    const updatedTopic = {
+      ...selectedTopic,
+      name: newTopicName,
     }
+    updateTopic(updatedTopic, refreshTopics)
+    setConfirmModalIsOpen(false)
   }
 
   return (
@@ -74,10 +60,10 @@ const Topics: React.FC<Props> = ({ topics, refreshTopics }) => {
         onConfirm={onConfirmDeleteTopic}
       />
       <AddAndEditTopicModal
-        isOpen={addAndEditTopicModalIsOpen}
-        close={() => setAddAndEditTopicModalIsOpen(false)}
+        isOpen={editTopicModalIsOpen}
+        close={() => setEditTopicModalIsOpen(false)}
         content={selectedTopic && selectedTopic.name}
-        title={editingTopic ? 'Rename topic' : 'New topic'}
+        title="Rename topic"
         onConfirm={onConfirmEditOrAddTopic}
       />
       <Container>
@@ -86,7 +72,7 @@ const Topics: React.FC<Props> = ({ topics, refreshTopics }) => {
           title="Topics"
           onDelete={onDeleteTopic}
           onEdit={onEditTopic}
-          onAdd={onAddTopic}
+          onAdd={openAddTopicModal}
         />
       </Container>
     </>
