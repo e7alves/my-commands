@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react'
 
-import { updateTopics, deleteTopic, createTopic } from '../../data/storage'
+import {
+  updateTopics,
+  deleteTopic,
+  createTopic,
+} from '../../data/storageActions'
 import { Topic, TaskToSelect } from '../../data/dataTypes'
 
 import { Container } from './style'

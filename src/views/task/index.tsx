@@ -8,7 +8,7 @@ import {
   Task as TaskType,
   Topic,
 } from '../../data/dataTypes'
-import { getTask, saveTask, updateTopics } from '../../data/storage'
+import { getTask, saveTask, updateTopics } from '../../data/storageActions'
 import TOPIC_DEFAULT_ID from '../../consts'
 
 import { Container, Section } from './style'

@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
 
 import { Topic } from '../../data/dataTypes'
-import { listTopics, createTopic } from '../../data/storage'
+import { listTopics, createTopic } from '../../data/storageActions'
 
 import Navbar from '../../components/navbar/index'
 import Task from '../../views/task/index'

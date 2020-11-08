@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
-import { deleteTask, updateTopics } from '../../data/storage'
+import { deleteTask, updateTopics } from '../../data/storageActions'
 import { Topic, TaskToSelect } from '../../data/dataTypes'
 import TOPIC_DEFAULT_ID from '../../consts'
 
