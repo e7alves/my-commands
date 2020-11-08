@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, RouteComponentProps } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
 
 import {
@@ -8,7 +8,7 @@ import {
   Task as TaskType,
   Topic,
 } from '../../data/dataTypes'
-import { getTask } from '../../data/storage'
+import { getTask, saveTask, updateTopics } from '../../data/storage'
 import TOPIC_DEFAULT_ID from '../../consts'
 
 import { Container, Section } from './style'
@@ -22,7 +22,7 @@ interface TaskParam {
 }
 
 const taskDefault = {
-  id: '',
+  id: undefined,
   name: '',
   link: '',
   topicId: TOPIC_DEFAULT_ID,
@@ -35,39 +35,39 @@ const taskInfoDefault = {
   topicId: TOPIC_DEFAULT_ID,
 }
 
-const getTaskInfo = (task) => {
+const getTaskInfo = (task: TaskType) => {
   const { topicId, name, link } = task
   return { topicId, name, link }
 }
 
-const Task: React.FC = () => {
+interface Props extends RouteComponentProps {
+  topics: Topic[]
+  refreshTopics: () => void
+}
+
+const Task: React.FC<Props> = ({ history, topics, refreshTopics }) => {
   const { taskId } = useParams<TaskParam>()
 
   const [editMode, setEditMode] = useState(!taskId)
-  const [topics, setTopics] = useState<Topic[]>(null)
   const [task, setTask] = useState<TaskType>(taskDefault)
   const [commandsCopy, setCommandsCopy] = useState<Command[]>([])
   const [taskInfoCopy, setTaskInfoCopy] = useState<TaskInfo>(taskInfoDefault)
 
-  useEffect(() => {
-    chrome.storage.local.get(['topics'], (result) => {
-      setTopics(result.topics || [])
-    })
-  }, [])
+  const addingNewTask = !taskId
 
   useEffect(() => {
-    if (taskId) {
+    if (!addingNewTask) {
       getTask(taskId, (task) => {
-        setTask(task)
-        setTaskInfoCopy(getTaskInfo(task))
-        setCommandsCopy(task.commands)
+        if (task) {
+          setTask(task)
+          setTaskInfoCopy(getTaskInfo(task))
+          setCommandsCopy(task.commands)
+        } else {
+          history.push('/task')
+        }
       })
     }
   }, [])
-
-  if (!topics) {
-    return null
-  }
 
   function toggleEditMode() {
     setEditMode(!editMode)
@@ -81,12 +81,36 @@ const Task: React.FC = () => {
   }
 
   function onSaveEdition() {
-    setTask({
+    const taskToSave = {
       ...task,
       ...taskInfoCopy,
       commands: commandsCopy,
+      id: task.id || uuidv4(),
+    }
+    saveTask(taskToSave, () => {
+      const topicsToUpdate = []
+      if (taskToSave.topicId !== task.topicId || addingNewTask) {
+        topics.forEach((topic) => {
+          if (topic.id === taskToSave.topicId) {
+            topic.tasks.push({
+              id: taskToSave.id,
+              name: taskToSave.name,
+            })
+            topicsToUpdate.push(topic)
+          }
+          if (topic.id === task.topicId) {
+            topicsToUpdate.push({
+              ...topic,
+              tasks: topic.tasks.filter((tk) => tk.id !== task.id),
+            })
+          }
+        })
+      }
+      updateTopics(topicsToUpdate, () => {
+        refreshTopics()
+        history.push(`/task/${taskToSave.id}`)
+      })
     })
-    toggleEditMode()
   }
 
   return (

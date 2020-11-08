@@ -61,7 +61,6 @@ global.chrome = {
   storage: {
     local: {
       get: (keys: string[], callback: (result: StorageResult) => void) => {
-        console.log(fakeStorage)
         const result = {}
         keys.forEach((key) => {
           result[key] = fakeStorage[key]
@@ -71,9 +70,9 @@ global.chrome = {
       set: (obj, callback) => {
         const key = Object.keys(obj)[0]
         const value = Object.values(obj)[0]
-        console.log(key, value)
         fakeStorage[key] = value
         callback && callback()
+        console.log(fakeStorage)
       },
     },
   },

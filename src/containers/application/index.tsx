@@ -15,7 +15,7 @@ import GlobalStyle from '../../styles/GlobalStyle'
 import AppContainer from './style'
 
 const Application: React.FC<null> = () => {
-  const [topics, setTopics] = useState<Topic[]>([])
+  const [topics, setTopics] = useState<Topic[]>(null)
   const [addTopicModalIsOpen, setAddTopicModalIsOpen] = useState<boolean>(false)
 
   function refreshTopics() {
@@ -34,6 +34,10 @@ const Application: React.FC<null> = () => {
       refreshTopics,
     )
     setAddTopicModalIsOpen(false)
+  }
+
+  if (!topics) {
+    return null
   }
 
   return (
@@ -60,7 +64,13 @@ const Application: React.FC<null> = () => {
             <Tasks {...props} topics={topics} refreshTopics={refreshTopics} />
           )}
         />
-        <Route path="/task/:taskId?" exact component={Task} />
+        <Route
+          path="/task/:taskId?"
+          exact
+          component={(props) => (
+            <Task {...props} topics={topics} refreshTopics={refreshTopics} />
+          )}
+        />
       </Switch>
       <AddAndEditTopicModal
         isOpen={addTopicModalIsOpen}

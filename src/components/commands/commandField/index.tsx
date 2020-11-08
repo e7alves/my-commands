@@ -56,6 +56,7 @@ const CommandField: React.FC<Props> = ({
             value={command.command}
             onChange={onChangeHandler}
             style={style}
+            spellCheck="false"
           />
           <Actions>
             <SquaredBtn

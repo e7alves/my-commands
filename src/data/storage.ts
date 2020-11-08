@@ -22,14 +22,19 @@ export const listTasks = (
   })
 }
 
-export const updateTopic = (newTopic: Topic, callback?: () => void) => {
-  const { id } = newTopic
+export const updateTopics = (
+  topicsToUpdate: Topic[],
+  callback?: () => void,
+) => {
   listTopics((topics) => {
-    const indexToUpdate = topics.findIndex((topic) => topic.id === id)
-    const topicToUpdate = { ...topics[indexToUpdate] }
-    topics.splice(indexToUpdate, 1, {
-      ...topicToUpdate,
-      ...newTopic,
+    topicsToUpdate.forEach((topic) => {
+      const { id } = topic
+      const indexToUpdate = topics.findIndex((tp) => tp.id === id)
+      const topicToUpdate = { ...topics[indexToUpdate] }
+      topics.splice(indexToUpdate, 1, {
+        ...topicToUpdate,
+        ...topic,
+      })
     })
     chrome.storage.local.set({ topics }, callback)
   })
@@ -56,4 +61,9 @@ export const createTopic = (topic: Topic, callback?: () => void) => {
     topics.push(topic)
     chrome.storage.local.set({ topics }, callback)
   })
+}
+
+export const saveTask = (task: Task, callback?: () => void) => {
+  const { id } = task
+  chrome.storage.local.set({ [id]: task }, callback)
 }

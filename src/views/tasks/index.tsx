@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
-import { deleteTask, updateTopic } from '../../data/storage'
+import { deleteTask, updateTopics } from '../../data/storage'
 import { Topic, TaskToSelect } from '../../data/dataTypes'
 import TOPIC_DEFAULT_ID from '../../consts'
 
@@ -53,7 +53,7 @@ const Tasks: React.FC<Props> = ({ topics, refreshTopics }) => {
       tasks: topic.tasks.filter((task) => task.id !== id),
     }
     deleteTask(id, () => {
-      updateTopic(updatedTopic, () => {
+      updateTopics([updatedTopic], () => {
         setModalIsOpen(false)
         refreshTopics()
       })

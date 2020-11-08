@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import { updateTopic, deleteTopic, createTopic } from '../../data/storage'
+import { updateTopics, deleteTopic, createTopic } from '../../data/storage'
 import { Topic, TaskToSelect } from '../../data/dataTypes'
 
 import { Container } from './style'
@@ -46,7 +46,7 @@ const Topics: React.FC<Props> = ({
       ...selectedTopic,
       name: newTopicName,
     }
-    updateTopic(updatedTopic, refreshTopics)
+    updateTopics([updatedTopic], refreshTopics)
     setConfirmModalIsOpen(false)
   }
 
