@@ -94,7 +94,7 @@ const TaskHeader: React.FC<Props> = ({
             {link && (
               <HorizInputSection>
                 {renderLabel('Link')}
-                <Link to={link}>
+                <Link to={link} target="_blank" rel="noreferer">
                   {link.length > 37 ? `${link.slice(0, 37)}...` : link}
                 </Link>
               </HorizInputSection>

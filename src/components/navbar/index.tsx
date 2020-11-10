@@ -1,6 +1,6 @@
 import React from 'react'
 
-import StyledNavbar from './style'
+import StyledNavbar, { Navlink } from './style'
 import { LinkButton } from '../links'
 import Icon from '../icon/index'
 import { TransparentBtn } from '../buttons'
@@ -15,22 +15,34 @@ const Navbar: React.FC<Props> = ({ openAddTopicModal }) => (
   <StyledNavbar>
     <ul>
       <li>
-        <LinkButton to="/tasks" style={{ fontSize }}>
+        <Navlink
+          to="/tasks"
+          style={{ fontSize }}
+          activeClassName="active-navlink"
+        >
           <Icon name="format-list-bulleted" />
           Tasks
-        </LinkButton>
+        </Navlink>
       </li>
       <li>
-        <LinkButton to="/topics" style={{ fontSize }}>
+        <Navlink
+          to="/topics"
+          style={{ fontSize }}
+          activeClassName="active-navlink"
+        >
           <Icon name="format-list-bulleted" />
           Topics
-        </LinkButton>
+        </Navlink>
       </li>
       <li>
-        <LinkButton to="/task" style={{ fontSize }}>
+        <Navlink
+          to="/task"
+          style={{ fontSize }}
+          activeClassName="active-navlink"
+        >
           <Icon name="plus" />
           Task
-        </LinkButton>
+        </Navlink>
       </li>
       <li>
         <TransparentBtn style={{ fontSize }} onClick={openAddTopicModal}>
@@ -39,10 +51,14 @@ const Navbar: React.FC<Props> = ({ openAddTopicModal }) => (
         </TransparentBtn>
       </li>
       <li>
-        <LinkButton to="/" style={{ fontSize }}>
+        <Navlink
+          to="/settings"
+          style={{ fontSize }}
+          activeClassName="active-navlink"
+        >
           <Icon name="cog" />
           Settings
-        </LinkButton>
+        </Navlink>
       </li>
     </ul>
   </StyledNavbar>

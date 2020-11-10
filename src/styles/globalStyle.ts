@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
+import { shade } from 'polished'
 
 import robotoFont from '../assets/fonts/Roboto-Regular.ttf'
-import courierFont from '../assets/fonts/CourierPrime-Regular.ttf'
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -29,6 +29,9 @@ const GlobalStyle = createGlobalStyle`
     &:focus {
       outline: none;
     }
+  }
+  .active-navlink {
+    background-color: ${({ theme }) => shade(0.2, theme.navbarBg)};
   }
 `
 export default GlobalStyle

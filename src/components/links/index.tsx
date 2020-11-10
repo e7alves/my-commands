@@ -7,10 +7,12 @@ interface Props {
   children?: React.ReactNode
   to: string
   style?: React.CSSProperties
+  target?: string
+  rel?: string
 }
 
-export const Link: React.FC<Props> = ({ children, to, style }) => (
-  <StyledLink href={to} style={style}>
+export const Link: React.FC<Props> = ({ children, to, style, target, rel }) => (
+  <StyledLink href={to} style={style} target={target} rel={rel}>
     {children}
   </StyledLink>
 )
