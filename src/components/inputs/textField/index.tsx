@@ -9,12 +9,29 @@ interface Props {
   name?: string
   vertical?: boolean
   onChange: (e: React.FormEvent<HTMLInputElement>) => void
+  autoFocus?: boolean
 }
 
-const TextField: React.FC<Props> = ({ value, id, name, onChange }) => (
+const TextField: React.FC<Props> = ({
+  value,
+  id,
+  name,
+  onChange,
+  autoFocus,
+}) => (
   <Wrapper>
-    <StyledTextField value={value} id={id} name={name} onChange={onChange} />
+    <StyledTextField
+      value={value}
+      id={id}
+      name={name}
+      onChange={onChange}
+      autoFocus={autoFocus}
+    />
   </Wrapper>
 )
+
+TextField.defaultProps = {
+  autoFocus: false,
+}
 
 export default TextField

@@ -68,6 +68,7 @@ const TaskHeader: React.FC<Props> = ({
                 name="name"
                 value={name}
                 onChange={onTextChange}
+                autoFocus
               />
             </HorizInputSection>
             <HorizInputSection>

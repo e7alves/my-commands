@@ -1,15 +1,7 @@
 import React from 'react'
 import { withTheme, DefaultTheme } from 'styled-components'
 
-import { TaskToSelect } from '../../../data/dataTypes'
-
-import {
-  StyledList,
-  ListItem,
-  ListLink,
-  RemoveAction,
-  EditAction,
-} from '../style'
+import { StyledList, ListItem, ListLink, RemoveAction } from '../style'
 import { IconBtn, SquaredBtn } from '../../buttons'
 import Icon from '../../icon'
 import { LinkButton } from '../../links'

@@ -47,13 +47,18 @@ interface Props extends RouteComponentProps {
 
 const Task: React.FC<Props> = ({ history, topics, refreshTopics }) => {
   const { taskId } = useParams<TaskParam>()
-
-  const [editMode, setEditMode] = useState(!taskId)
-  const [task, setTask] = useState<TaskType>(taskDefault)
-  const [commandsCopy, setCommandsCopy] = useState<Command[]>([])
-  const [taskInfoCopy, setTaskInfoCopy] = useState<TaskInfo>(taskInfoDefault)
-
   const addingNewTask = !taskId
+
+  const [editMode, setEditMode] = useState(addingNewTask)
+  const [task, setTask] = useState<TaskType>(taskDefault)
+  const [commandsCopy, setCommandsCopy] = useState<Command[]>([
+    {
+      id: uuidv4(),
+      command: '',
+      description: '',
+    },
+  ])
+  const [taskInfoCopy, setTaskInfoCopy] = useState<TaskInfo>(taskInfoDefault)
 
   useEffect(() => {
     if (!addingNewTask) {
