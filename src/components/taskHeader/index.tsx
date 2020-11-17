@@ -23,7 +23,11 @@ const TaskHeader: React.FC<Props> = ({
   setTaskInfo,
 }) => {
   function renderLabel(text: string, htmlFor?: string) {
-    return <Label htmlFor={htmlFor}>{text}</Label>
+    return (
+      <Label htmlFor={htmlFor} style={{ width: '2rem' }}>
+        {text}
+      </Label>
+    )
   }
 
   const { topicId, name, link } = taskInfo

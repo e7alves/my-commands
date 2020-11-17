@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 
 import { deleteTask, updateTopics } from '../../data/storageActions'
 import { Topic, TaskToSelect } from '../../data/dataTypes'
-import TOPIC_DEFAULT_ID from '../../consts'
+import { TOPIC_DEFAULT_ID } from '../../consts'
 
 import { Container } from './style'
 import { HorizInputSection } from '../../components/inputs/style'
@@ -25,7 +25,9 @@ interface Props {
 const Tasks: React.FC<Props> = ({ topics, refreshTopics }) => {
   const { topicId } = useParams<TopicParam>()
 
-  const [selectedTopicId, setSelectedTopicId] = useState<string>(topicId || '2')
+  const [selectedTopicId, setSelectedTopicId] = useState<string>(
+    topicId || TOPIC_DEFAULT_ID,
+  )
   const [tasks, setTasks] = useState<TaskToSelect[]>(null)
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
   const [taskToDelete, setTaskToDelete] = useState<TaskToSelect>(null)

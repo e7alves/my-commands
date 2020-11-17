@@ -24,7 +24,7 @@ export const HorizInputSection = styled.div`
     margin-bottom: 0.5rem;
   }
   label {
-    width: 2rem;
     margin-right: 0.5rem;
+    text-align: end;
   }
 `

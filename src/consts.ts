@@ -1,3 +1,3 @@
-const TOPIC_DEFAULT_ID = '1'
+export const TOPIC_DEFAULT_ID = '1'
 
-export default TOPIC_DEFAULT_ID
+export const exportFileName = 'myCommands.json'

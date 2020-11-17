@@ -1,7 +1,30 @@
+export const themeDefault = 'dark'
+
 export default {
   dark: {
     background: '#333F50',
     text: '#fff',
+    text2: '#ddd',
+    text3: '#00B0F0',
+    navbarBg: '#004376',
+    commandAreaBg: '#222A35',
+    commandDescriptionAreaBg: '#3C4B5E',
+    commandTextColor: '#fff',
+    inputBorderColor: '#0594FF',
+    readModeCommandBorderColor: '#7030A0',
+    commandToCopyFieldBg: '#435369',
+    commandToCopyIconColor: '#999',
+    primaryButtonBg: '#512373',
+    secondaryButtonBtn: '#0069B8',
+    actionButtonBg: '#6a8ed2',
+    cancelButtonBg: '#8FAADC',
+    listBg: '#3C4B5E',
+    dangerColor: '#e39c9c',
+    warnColor: '#b2a63b',
+  },
+  light: {
+    background: '#fff',
+    text: '#000',
     text2: '#ddd',
     text3: '#00B0F0',
     navbarBg: '#004376',
@@ -19,9 +42,5 @@ export default {
     listBg: '#3C4B5E',
     dangerColor: '#e39c9c',
     warnColor: '#b2a63b',
-  },
-  light: {
-    background: '#fff',
-    text: '#000',
   },
 }

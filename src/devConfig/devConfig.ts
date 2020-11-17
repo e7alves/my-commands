@@ -61,6 +61,10 @@ global.chrome = {
   storage: {
     local: {
       get: (keys: string[], callback: (result: StorageResult) => void) => {
+        if (!keys) {
+          callback(fakeStorage)
+          return
+        }
         const result = {}
         keys.forEach((key) => {
           result[key] = fakeStorage[key]

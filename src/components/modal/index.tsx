@@ -37,6 +37,7 @@ interface Props {
   title?: string
   height?: string
   children?: React.ReactNode
+  shouldCloseOnOverlayClick?: boolean
 }
 
 const Modal: React.FC<Props> = ({
@@ -46,6 +47,7 @@ const Modal: React.FC<Props> = ({
   title,
   height,
   children,
+  shouldCloseOnOverlayClick,
 }) => (
   <ReactModal
     isOpen={isOpen}
@@ -53,7 +55,7 @@ const Modal: React.FC<Props> = ({
     style={{
       content: { ...modalStyle, backgroundColor: theme.background, height },
     }}
-    shouldCloseOnOverlayClick
+    shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
   >
     <ModalTitle>{title}</ModalTitle>
     {children}
@@ -62,6 +64,7 @@ const Modal: React.FC<Props> = ({
 
 Modal.defaultProps = {
   height: '100px',
+  shouldCloseOnOverlayClick: true,
 }
 
 export default withTheme(Modal)

@@ -1,7 +1,7 @@
 import React from 'react'
 import { withTheme, DefaultTheme } from 'styled-components'
 
-import TOPIC_DEFAULT_ID from '../../../consts'
+import { TOPIC_DEFAULT_ID } from '../../../consts'
 
 import { TaskToSelect } from '../../../data/dataTypes'
 

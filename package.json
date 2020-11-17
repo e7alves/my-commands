@@ -22,6 +22,7 @@
   "dependencies": {
     "babel-loader": "8.1.0",
     "css-loader": "3.6.0",
+    "file-saver": "2.0.2",
     "html-to-formatted-text": "2.7.0",
     "polished": "4.0.3",
     "react": "16.13.1",

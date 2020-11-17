@@ -9,7 +9,7 @@ import {
   Topic,
 } from '../../data/dataTypes'
 import { getTask, saveTask, updateTopics } from '../../data/storageActions'
-import TOPIC_DEFAULT_ID from '../../consts'
+import { TOPIC_DEFAULT_ID } from '../../consts'
 
 import { Container, Section } from './style'
 import TaskHeader from '../../components/taskHeader'

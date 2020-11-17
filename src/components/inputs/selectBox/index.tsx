@@ -11,6 +11,7 @@ interface Props {
   extractLabel?: (option: unknown) => string
   extractKey?: (option: unknown) => string
   onChange: (e: React.FormEvent<HTMLSelectElement>) => void
+  style?: React.CSSProperties
 }
 
 const SelectBox: React.FC<Props> = ({
@@ -21,8 +22,15 @@ const SelectBox: React.FC<Props> = ({
   extractLabel = () => 'name',
   extractKey = () => 'id',
   onChange,
+  style,
 }) => (
-  <StyledSelectBox value={value} id={id} name={name} onChange={onChange}>
+  <StyledSelectBox
+    value={value}
+    id={id}
+    name={name}
+    onChange={onChange}
+    style={style}
+  >
     {options.map((option) => {
       const value = option[extractKey(option)]
       return (

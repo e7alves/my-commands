@@ -1,4 +1,5 @@
 import { Topic, Task } from './dataTypes'
+import { TOPIC_DEFAULT_ID } from '../consts'
 
 export const listTopics = (callback: (result: Topic[]) => void) => {
   chrome.storage.local.get(['topics'], (result) => {
@@ -58,12 +59,58 @@ export const deleteTopic = (topicId: string, callback: () => void) => {
 
 export const createTopic = (topic: Topic, callback?: () => void) => {
   listTopics((topics) => {
-    topics.push(topic)
-    chrome.storage.local.set({ topics }, callback)
+    if (!topics) {
+      chrome.storage.local.set({ topics: [topic] }, callback)
+    } else {
+      topics.push(topic)
+      chrome.storage.local.set({ topics }, callback)
+    }
   })
 }
 
 export const saveTask = (task: Task, callback?: () => void) => {
   const { id } = task
   chrome.storage.local.set({ [id]: task }, callback)
+}
+
+export const getTheme = (callback?: (theme: StorageResult) => void) => {
+  chrome.storage.local.get(['theme'], callback)
+}
+
+export const updateTheme = (theme: string, callback?: () => void) => {
+  chrome.storage.local.set({ theme }, callback)
+}
+
+export const getLang = (callback?: (lang: StorageResult) => void) => {
+  chrome.storage.local.get(['lang'], callback)
+}
+
+export const updateLang = (lang: string, callback?: () => void) => {
+  chrome.storage.local.set({ lang }, callback)
+}
+
+export const getDataToExport = (callback?: (lang: StorageResult) => void) => {
+  chrome.storage.local.get(null, callback)
+}
+
+export const importData = (data: any, callback?: () => void) => {
+  chrome.storage.local.set({ ...data }, callback)
+}
+
+export const clearData = (callback?: () => void) => {
+  listTopics((topics) => {
+    topics.forEach(({ tasks }) => {
+      tasks.forEach(({ id }) => {
+        chrome.storage.local.set({ [id]: null })
+      })
+    })
+    chrome.storage.local.set({ theme: null })
+    chrome.storage.local.set({ lang: null })
+    chrome.storage.local.set({
+      topics: topics
+        .filter(({ id }) => id === TOPIC_DEFAULT_ID)
+        .map((topic) => ({ ...topic, tasks: [] })),
+    })
+    callback && callback()
+  })
 }
