@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, RouteComponentProps } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
+import htmlToFormattedText from 'html-to-formatted-text'
 
 import {
   Command,
@@ -8,7 +9,13 @@ import {
   Task as TaskType,
   Topic,
 } from '../../data/dataTypes'
-import { getTask, saveTask, updateTopics } from '../../data/storageActions'
+import {
+  getTask,
+  saveTask,
+  updateTopics,
+  getCommandsFromContextSelection,
+  clearCommandsContextSelection,
+} from '../../data/storageActions'
 import { TOPIC_DEFAULT_ID } from '../../consts'
 
 import { Container, Section } from './style'
@@ -74,15 +81,41 @@ const Task: React.FC<Props> = ({ history, topics, refreshTopics }) => {
     }
   }, [])
 
+  function setCommandFromContextSelection() {
+    getCommandsFromContextSelection((commands) => {
+      if (commands) {
+        setCommandsCopy(
+          commands.map((command) => ({
+            id: uuidv4(),
+            description: '',
+            command: htmlToFormattedText(command),
+          })),
+        )
+        setEditMode(true)
+      }
+    })
+  }
+
+  useEffect(() => {
+    setCommandFromContextSelection()
+    chrome.runtime.onMessage.addListener((request) => {
+      if (request.eventName === 'copy-by-context-menu') {
+        setCommandFromContextSelection()
+      }
+    })
+  }, [])
+
   function toggleEditMode() {
     setEditMode(!editMode)
   }
 
   function onCancelEdition() {
-    const { commands } = task
-    setCommandsCopy(commands)
-    setTaskInfoCopy(getTaskInfo(task))
-    toggleEditMode()
+    clearCommandsContextSelection(() => {
+      const { commands } = task
+      setCommandsCopy(commands)
+      setTaskInfoCopy(getTaskInfo(task))
+      toggleEditMode()
+    })
   }
 
   function onSaveEdition() {
@@ -115,6 +148,7 @@ const Task: React.FC<Props> = ({ history, topics, refreshTopics }) => {
         refreshTopics()
         history.push(`/task/${taskToSave.id}`)
       })
+      clearCommandsContextSelection()
     })
   }
 

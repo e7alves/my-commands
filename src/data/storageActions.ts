@@ -1,16 +1,16 @@
-import { Topic, Task } from './dataTypes'
+import { Topic, Task, Command } from './dataTypes'
 import { TOPIC_DEFAULT_ID } from '../consts'
 
 export const listTopics = (callback: (result: Topic[]) => void) => {
   chrome.storage.local.get(['topics'], (result) => {
-    callback(result.topics)
+    callback && callback(result.topics)
   })
 }
 
 export const getTask = (key: string, callback: (result: Task) => void) => {
   chrome.storage.local.get([key], (result) => {
     const task = result[key]
-    callback(task)
+    callback && callback(task)
   })
 }
 
@@ -19,7 +19,7 @@ export const listTasks = (
   callback: (result: Task[]) => void,
 ) => {
   chrome.storage.local.get(keys, (result) => {
-    callback(result.tasks)
+    callback && callback(result.tasks)
   })
 }
 
@@ -113,4 +113,16 @@ export const clearData = (callback?: () => void) => {
     })
     callback && callback()
   })
+}
+
+export const getCommandsFromContextSelection = (
+  callback?: (commands: string[]) => void,
+) => {
+  chrome.storage.local.get(['contextSelectionCommands'], (result) => {
+    callback && callback(result.contextSelectionCommands)
+  })
+}
+
+export const clearCommandsContextSelection = (callback?: () => void) => {
+  chrome.storage.local.set({ contextSelectionCommands: null }, callback)
 }

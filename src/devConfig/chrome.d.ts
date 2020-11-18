@@ -11,7 +11,7 @@ interface FakeStorage {
 
 interface FakeRuntime {
   onMessage: {
-    addListener: () => null
+    addListener: (request: any) => null
   }
 }
 
