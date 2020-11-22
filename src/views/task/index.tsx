@@ -14,6 +14,7 @@ import {
   saveTask,
   updateTopics,
   getCommandsFromContextSelection,
+  updateCommandsContextSelection,
   clearCommandsContextSelection,
 } from '../../data/storageActions'
 import { TOPIC_DEFAULT_ID } from '../../consts'
@@ -82,14 +83,18 @@ const Task: React.FC<Props> = ({ history, topics, refreshTopics }) => {
   }, [])
 
   function setCommandFromContextSelection() {
-    getCommandsFromContextSelection((commands) => {
+    getCommandsFromContextSelection((commands: any) => {
       if (commands) {
         setCommandsCopy(
-          commands.map((command) => ({
-            id: uuidv4(),
-            description: '',
-            command: htmlToFormattedText(command),
-          })),
+          commands.map((command) =>
+            typeof command === 'string'
+              ? {
+                  id: uuidv4(),
+                  description: '',
+                  command: htmlToFormattedText(command),
+                }
+              : command,
+          ),
         )
         setEditMode(true)
       }
@@ -109,12 +114,23 @@ const Task: React.FC<Props> = ({ history, topics, refreshTopics }) => {
     setEditMode(!editMode)
   }
 
+  function onCommandsChange(newCommands: Command[]) {
+    setCommandsCopy(newCommands)
+    getCommandsFromContextSelection(() => {
+      updateCommandsContextSelection(newCommands)
+    })
+  }
+
   function onCancelEdition() {
     clearCommandsContextSelection(() => {
-      const { commands } = task
-      setCommandsCopy(commands)
-      setTaskInfoCopy(getTaskInfo(task))
-      toggleEditMode()
+      if (addingNewTask) {
+        history.push('/tasks')
+      } else {
+        const { commands } = task
+        setCommandsCopy(commands)
+        setTaskInfoCopy(getTaskInfo(task))
+        toggleEditMode()
+      }
     })
   }
 
@@ -173,7 +189,7 @@ const Task: React.FC<Props> = ({ history, topics, refreshTopics }) => {
         <Commands
           editMode={editMode}
           commands={commandsCopy}
-          setCommands={(newCommands) => setCommandsCopy(newCommands)}
+          onCommandsChange={onCommandsChange}
           onCancelEdition={onCancelEdition}
           onSaveEdition={onSaveEdition}
         />

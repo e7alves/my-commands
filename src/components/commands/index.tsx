@@ -11,12 +11,16 @@ import { AddCommandBtn } from '../buttons/index'
 interface Props {
   editMode: boolean
   commands: Command[]
-  setCommands: (newCommmands: Command[]) => void
+  onCommandsChange: (newCommmands: Command[]) => void
   onCancelEdition: () => void
   onSaveEdition: (commands: Command[]) => void
 }
 
-const Commands: React.FC<Props> = ({ editMode, commands, setCommands }) => {
+const Commands: React.FC<Props> = ({
+  editMode,
+  commands,
+  onCommandsChange,
+}) => {
   function onChangePosition(idx: number, toUp?: boolean) {
     if ((idx === 0 && toUp) || (idx === commands.length - 1 && !toUp)) {
       return
@@ -25,15 +29,15 @@ const Commands: React.FC<Props> = ({ editMode, commands, setCommands }) => {
     const newCommands = [...commands]
     newCommands[idxToChange] = commands[idx]
     newCommands[idx] = commands[idxToChange]
-    setCommands(newCommands)
+    onCommandsChange(newCommands)
   }
 
   function onDelete(idxToDelete: number) {
-    setCommands(commands.filter((command, idx) => idx !== idxToDelete))
+    onCommandsChange(commands.filter((command, idx) => idx !== idxToDelete))
   }
 
   function onAddCommand() {
-    setCommands([
+    onCommandsChange([
       ...commands,
       {
         id: uuidv4(),
@@ -44,10 +48,10 @@ const Commands: React.FC<Props> = ({ editMode, commands, setCommands }) => {
     ])
   }
 
-  function onCommandChange(idx, newCommand) {
+  function onCommandChange(idx: number, newCommand: Command) {
     const newCommandsCopy = [...commands]
     newCommandsCopy[idx] = newCommand
-    setCommands(newCommandsCopy)
+    onCommandsChange(newCommandsCopy)
   }
 
   return (

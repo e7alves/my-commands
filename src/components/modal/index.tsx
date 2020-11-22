@@ -23,7 +23,7 @@ const modalStyle: React.CSSProperties = {
   height: '100px',
   padding: '10px',
   position: 'static',
-  margin: '15% 0 0 0',
+  margin: '250px 0 0 0',
   transform: 'none',
   width: '325px',
 }

@@ -123,6 +123,13 @@ export const getCommandsFromContextSelection = (
   })
 }
 
+export const updateCommandsContextSelection = (
+  newCommands: Command[],
+  callback?: () => void,
+) => {
+  chrome.storage.local.set({ contextSelectionCommands: newCommands }, callback)
+}
+
 export const clearCommandsContextSelection = (callback?: () => void) => {
   chrome.storage.local.set({ contextSelectionCommands: null }, callback)
 }

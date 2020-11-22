@@ -44,7 +44,9 @@ const Application: React.FC<RouteComponentProps> = ({ history }) => {
   useEffect(() => {
     chrome.runtime.onMessage.addListener((request) => {
       if (request.eventName === 'copy-by-context-menu') {
-        history.push('/task')
+        if (!window.location.href.match(/task$/)) {
+          history.push('/task')
+        }
       }
     })
   }, [])
