@@ -36,7 +36,7 @@ const Navbar: React.FC<Props> = ({ openAddTopicModal }) => (
       </li>
       <li>
         <Navlink
-          to="/task"
+          to="/new-task"
           style={{ fontSize }}
           activeClassName="active-navlink"
         >

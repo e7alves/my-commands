@@ -46,7 +46,7 @@ const TopicList: React.FC<Props> = ({
       <StyledList>
         {topics.map(({ id, name }, idx) => (
           <ListItem key={id}>
-            <ListLink to={`/tasks/${id}`}>
+            <ListLink to={`/tasks?topicId=${id}`}>
               {name}
               {TOPIC_DEFAULT_ID !== id && (
                 <span>

@@ -32,7 +32,7 @@ const TaskList: React.FC<Props> = ({ tasks, title, onDelete, theme }) => {
       <StyledList>
         {tasks.map(({ id, name }, idx) => (
           <ListItem key={id}>
-            <ListLink to={`/task/${id}`}>
+            <ListLink to={`/tasks/${id}`}>
               {name}
               <RemoveAction>
                 <IconBtn
@@ -59,7 +59,7 @@ const TaskList: React.FC<Props> = ({ tasks, title, onDelete, theme }) => {
           marginLeft: '10px',
         }}
       >
-        <LinkButton to="/task">
+        <LinkButton to="/new-task">
           <Icon name="plus" />
         </LinkButton>
       </SquaredBtn>

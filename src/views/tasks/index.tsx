@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 import { deleteTask, updateTopics } from '../../data/storageActions'
 import { Topic, TaskToSelect } from '../../data/dataTypes'
@@ -22,8 +22,12 @@ interface Props {
   tasks: TaskToSelect[]
 }
 
+function useQuery() {
+  return new URLSearchParams(useLocation().search)
+}
+
 const Tasks: React.FC<Props> = ({ topics, refreshTopics }) => {
-  const { topicId } = useParams<TopicParam>()
+  const topicId = useQuery().get('topicId')
 
   const [selectedTopicId, setSelectedTopicId] = useState<string>(
     topicId || TOPIC_DEFAULT_ID,

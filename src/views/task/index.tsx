@@ -162,7 +162,7 @@ const Task: React.FC<Props> = ({ history, topics, refreshTopics }) => {
       }
       updateTopics(topicsToUpdate, () => {
         refreshTopics()
-        history.push(`/task/${taskToSave.id}`)
+        history.push(`/tasks/${taskToSave.id}`)
       })
       clearCommandsContextSelection()
     })

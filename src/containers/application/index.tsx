@@ -96,7 +96,7 @@ const Application: React.FC<RouteComponentProps> = ({ history }) => {
                 )}
               />
               <Route
-                path="/tasks/:topicId?"
+                path="/tasks"
                 exact
                 component={(props) => (
                   <Tasks
@@ -107,7 +107,18 @@ const Application: React.FC<RouteComponentProps> = ({ history }) => {
                 )}
               />
               <Route
-                path="/task/:taskId?"
+                path="/tasks/:taskId?"
+                exact
+                component={(props) => (
+                  <Task
+                    {...props}
+                    topics={topics}
+                    refreshTopics={refreshTopics}
+                  />
+                )}
+              />
+              <Route
+                path="/new-task"
                 exact
                 component={(props) => (
                   <Task
