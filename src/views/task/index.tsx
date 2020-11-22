@@ -1,14 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useParams, RouteComponentProps } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
 import htmlToFormattedText from 'html-to-formatted-text'
 
-import {
-  Command,
-  TaskInfo,
-  Task as TaskType,
-  Topic,
-} from '../../data/dataTypes'
+import { Command, TaskInfo, Task as TaskType } from '../../data/dataTypes'
 import {
   getTask,
   saveTask,
@@ -24,6 +19,8 @@ import TaskHeader from '../../components/taskHeader'
 import Commands from '../../components/commands'
 import { PrimaryBtn, CancelBtn, SecondaryBtn } from '../../components/buttons'
 import { AlignedContainer } from '../../styles/layout'
+
+import { TopicsContext, TopicsContextType } from '../../topicsContext'
 
 interface TaskParam {
   taskId: string
@@ -48,14 +45,11 @@ const getTaskInfo = (task: TaskType) => {
   return { topicId, name, link }
 }
 
-interface Props extends RouteComponentProps {
-  topics: Topic[]
-  refreshTopics: () => void
-}
-
-const Task: React.FC<Props> = ({ history, topics, refreshTopics }) => {
+const Task: React.FC<RouteComponentProps> = ({ history }) => {
   const { taskId } = useParams<TaskParam>()
   const addingNewTask = !taskId
+
+  const { topics, refreshTopics } = useContext<TopicsContextType>(TopicsContext)
 
   const [editMode, setEditMode] = useState(addingNewTask)
   const [task, setTask] = useState<TaskType>(taskDefault)
@@ -162,7 +156,11 @@ const Task: React.FC<Props> = ({ history, topics, refreshTopics }) => {
       }
       updateTopics(topicsToUpdate, () => {
         refreshTopics()
-        history.push(`/tasks/${taskToSave.id}`)
+        if (addingNewTask) {
+          history.push(`/tasks/${taskToSave.id}`)
+        } else {
+          setEditMode(false)
+        }
       })
       clearCommandsContextSelection()
     })

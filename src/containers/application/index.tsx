@@ -16,6 +16,7 @@ import themes, { themeDefault } from '../../theme/themes'
 
 import Navbar from '../../components/navbar/index'
 import Task from '../../views/task/index'
+
 import Tasks from '../../views/tasks'
 import Topics from '../../views/topics'
 import Settings from '../../views/settings'
@@ -24,6 +25,8 @@ import AddAndEditTopicModal from '../../components/modal/addAndEditTopicModal'
 import GlobalStyle from '../../styles/GlobalStyle'
 import { AppContainer, AppWrapper } from './style'
 import { defaultLang, LangContext, messageBundle } from '../../lang/langConfig'
+
+import { TopicsContext } from '../../topicsContext'
 
 const Application: React.FC<RouteComponentProps> = ({ history }) => {
   const [topics, setTopics] = useState<Topic[]>(null)
@@ -78,79 +81,51 @@ const Application: React.FC<RouteComponentProps> = ({ history }) => {
   return (
     <ThemeProvider theme={themes[theme]}>
       <LangContext.Provider value={messageBundle[lang]}>
-        <AppContainer>
-          <AppWrapper>
-            <GlobalStyle />
-            <Navbar openAddTopicModal={() => setAddTopicModalIsOpen(true)} />
-            <Switch>
-              <Route
-                path="/topics"
-                exact
-                component={(props) => (
-                  <Topics
-                    {...props}
-                    topics={topics}
-                    refreshTopics={refreshTopics}
-                    openAddTopicModal={() => setAddTopicModalIsOpen(true)}
-                  />
-                )}
+        <TopicsContext.Provider
+          value={{
+            topics,
+            refreshTopics,
+            switchAddTopicModal: setAddTopicModalIsOpen,
+          }}
+        >
+          <AppContainer>
+            <AppWrapper>
+              <GlobalStyle />
+              <Navbar openAddTopicModal={() => setAddTopicModalIsOpen(true)} />
+              <Switch>
+                <Route path="/topics" exact component={Topics} />
+                <Route path="/tasks" exact component={Tasks} />
+                <Route
+                  key="task-view"
+                  path="/tasks/:taskId?"
+                  exact
+                  component={Task}
+                />
+                <Route key="new-task" path="/new-task" exact component={Task} />
+                <Route
+                  path="/settings"
+                  exact
+                  component={(props) => (
+                    <Settings
+                      {...props}
+                      currentTheme={theme}
+                      updateTheme={onUpdateTheme}
+                      currentLang={lang}
+                      updateLang={onUpdateLang}
+                    />
+                  )}
+                />
+              </Switch>
+              <AddAndEditTopicModal
+                isOpen={addTopicModalIsOpen}
+                close={() => setAddTopicModalIsOpen(false)}
+                content=""
+                title="New topic"
+                onConfirm={onAddTopic}
               />
-              <Route
-                path="/tasks"
-                exact
-                component={(props) => (
-                  <Tasks
-                    {...props}
-                    topics={topics}
-                    refreshTopics={refreshTopics}
-                  />
-                )}
-              />
-              <Route
-                path="/tasks/:taskId?"
-                exact
-                component={(props) => (
-                  <Task
-                    {...props}
-                    topics={topics}
-                    refreshTopics={refreshTopics}
-                  />
-                )}
-              />
-              <Route
-                path="/new-task"
-                exact
-                component={(props) => (
-                  <Task
-                    {...props}
-                    topics={topics}
-                    refreshTopics={refreshTopics}
-                  />
-                )}
-              />
-              <Route
-                path="/settings"
-                exact
-                component={(props) => (
-                  <Settings
-                    {...props}
-                    currentTheme={theme}
-                    updateTheme={onUpdateTheme}
-                    currentLang={lang}
-                    updateLang={onUpdateLang}
-                  />
-                )}
-              />
-            </Switch>
-            <AddAndEditTopicModal
-              isOpen={addTopicModalIsOpen}
-              close={() => setAddTopicModalIsOpen(false)}
-              content=""
-              title="New topic"
-              onConfirm={onAddTopic}
-            />
-          </AppWrapper>
-        </AppContainer>
+            </AppWrapper>
+          </AppContainer>
+        </TopicsContext.Provider>
       </LangContext.Provider>
     </ThemeProvider>
   )

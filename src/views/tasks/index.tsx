@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useLocation } from 'react-router-dom'
 
 import { deleteTask, updateTopics } from '../../data/storageActions'
@@ -12,22 +12,16 @@ import Label from '../../components/inputs/label'
 import SelectBox from '../../components/inputs/selectBox'
 import ConfirmModal from '../../components/modal/confirmModal'
 
-interface TopicParam {
-  topicId: string
-}
-
-interface Props {
-  topics: Topic[]
-  refreshTopics: () => void
-  tasks: TaskToSelect[]
-}
+import { TopicsContext, TopicsContextType } from '../../topicsContext'
 
 function useQuery() {
   return new URLSearchParams(useLocation().search)
 }
 
-const Tasks: React.FC<Props> = ({ topics, refreshTopics }) => {
+const Tasks: React.FC = () => {
   const topicId = useQuery().get('topicId')
+
+  const { topics, refreshTopics } = useContext<TopicsContextType>(TopicsContext)
 
   const [selectedTopicId, setSelectedTopicId] = useState<string>(
     topicId || TOPIC_DEFAULT_ID,

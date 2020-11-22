@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 
 import { updateTopics, deleteTopic } from '../../data/storageActions'
 import { Topic, TaskToSelect } from '../../data/dataTypes'
@@ -8,18 +8,13 @@ import TopicList from '../../components/lists/topicList'
 import ConfirmModal from '../../components/modal/confirmModal'
 import AddAndEditTopicModal from '../../components/modal/addAndEditTopicModal'
 
-interface Props {
-  topics: Topic[]
-  refreshTopics: () => void
-  tasks: TaskToSelect[]
-  openAddTopicModal: () => void
-}
+import { TopicsContext, TopicsContextType } from '../../topicsContext'
 
-const Topics: React.FC<Props> = ({
-  topics,
-  refreshTopics,
-  openAddTopicModal,
-}) => {
+const Topics: React.FC = () => {
+  const { topics, refreshTopics, switchAddTopicModal } = useContext<
+    TopicsContextType
+  >(TopicsContext)
+
   const [confirmModalIsOpen, setConfirmModalIsOpen] = useState<boolean>(false)
   const [editTopicModalIsOpen, setEditTopicModalIsOpen] = useState<boolean>(
     false,
@@ -39,6 +34,7 @@ const Topics: React.FC<Props> = ({
   function onConfirmDeleteTopic() {
     const { id } = selectedTopic
     deleteTopic(id, refreshTopics)
+    setConfirmModalIsOpen(false)
   }
 
   function onConfirmEditOrAddTopic(newTopicName: string) {
@@ -47,7 +43,7 @@ const Topics: React.FC<Props> = ({
       name: newTopicName,
     }
     updateTopics([updatedTopic], refreshTopics)
-    setConfirmModalIsOpen(false)
+    setEditTopicModalIsOpen(false)
   }
 
   return (
@@ -72,7 +68,7 @@ const Topics: React.FC<Props> = ({
           title="Topics"
           onDelete={onDeleteTopic}
           onEdit={onEditTopic}
-          onAdd={openAddTopicModal}
+          onAdd={() => switchAddTopicModal(true)}
         />
       </Container>
     </>
