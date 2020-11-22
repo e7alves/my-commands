@@ -45,10 +45,9 @@ chrome.runtime.onMessage.addListener((request) => {
       () =>
         chrome.storage.local.set(
           { contextSelectionCommands: [request.command] },
-          createNewWindow('index.html#/task'),
+          createNewWindow('index.html#/new-task'),
         ),
       () => {
-        chrome.windows.update(windowId, { focused: true })
         chrome.storage.local.get((result) => {
           const newContextSelectionCommands = [
             ...(result.contextSelectionCommands || []),
@@ -58,11 +57,13 @@ chrome.runtime.onMessage.addListener((request) => {
             {
               contextSelectionCommands: newContextSelectionCommands,
             },
-            () =>
+            () => {
               chrome.runtime.sendMessage({
                 eventName: 'copy-by-context-menu',
                 command: newContextSelectionCommands,
-              }),
+              })
+              chrome.windows.update(windowId, { focused: true })
+            },
           )
         })
       },

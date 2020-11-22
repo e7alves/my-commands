@@ -78,9 +78,10 @@ const Task: React.FC<RouteComponentProps> = ({ history }) => {
 
   function setCommandFromContextSelection() {
     getCommandsFromContextSelection((commands: any) => {
+      console.log(commands)
       if (commands) {
         setCommandsCopy(
-          commands.map((command) =>
+          commands.map((command: string | Command) =>
             typeof command === 'string'
               ? {
                   id: uuidv4(),
@@ -102,6 +103,7 @@ const Task: React.FC<RouteComponentProps> = ({ history }) => {
         setCommandFromContextSelection()
       }
     })
+    return () => addingNewTask && clearCommandsContextSelection()
   }, [])
 
   function toggleEditMode() {
@@ -116,16 +118,16 @@ const Task: React.FC<RouteComponentProps> = ({ history }) => {
   }
 
   function onCancelEdition() {
-    clearCommandsContextSelection(() => {
-      if (addingNewTask) {
-        history.push('/tasks')
-      } else {
+    if (addingNewTask) {
+      history.push('/tasks')
+    } else {
+      clearCommandsContextSelection(() => {
         const { commands } = task
         setCommandsCopy(commands)
         setTaskInfoCopy(getTaskInfo(task))
         toggleEditMode()
-      }
-    })
+      })
+    }
   }
 
   function onSaveEdition() {
