@@ -70,7 +70,7 @@ const Task: React.FC<RouteComponentProps> = ({ history }) => {
           setTaskInfoCopy(getTaskInfo(task))
           setCommandsCopy(task.commands)
         } else {
-          history.push('/task')
+          history.push('/new-task')
         }
       })
     }
@@ -90,19 +90,24 @@ const Task: React.FC<RouteComponentProps> = ({ history }) => {
               : command,
           ),
         )
-        setEditMode(true)
       }
     })
   }
 
   function getCommandsByContextSelection(request) {
     if (request.eventName === 'copy-by-context-menu') {
-      setCommandFromContextSelection()
+      if (!editMode) {
+        history.push('/new-task')
+      } else {
+        setCommandFromContextSelection()
+      }
     }
   }
 
   useEffect(() => {
-    setCommandFromContextSelection()
+    if (addingNewTask) {
+      setCommandFromContextSelection()
+    }
     chrome.runtime.onMessage.addListener(getCommandsByContextSelection)
     return () => {
       chrome.runtime.onMessage.removeListener(getCommandsByContextSelection)
@@ -111,7 +116,11 @@ const Task: React.FC<RouteComponentProps> = ({ history }) => {
   }, [])
 
   function toggleEditMode() {
-    setEditMode(!editMode)
+    if (editMode) {
+      clearCommandsContextSelection(() => setEditMode(!editMode))
+    } else {
+      updateCommandsContextSelection(commandsCopy, () => setEditMode(!editMode))
+    }
   }
 
   function onCommandsChange(newCommands: Command[]) {
@@ -125,12 +134,10 @@ const Task: React.FC<RouteComponentProps> = ({ history }) => {
     if (addingNewTask) {
       history.push('/tasks')
     } else {
-      clearCommandsContextSelection(() => {
-        const { commands } = task
-        setCommandsCopy(commands)
-        setTaskInfoCopy(getTaskInfo(task))
-        toggleEditMode()
-      })
+      const { commands } = task
+      setCommandsCopy(commands)
+      setTaskInfoCopy(getTaskInfo(task))
+      toggleEditMode()
     }
   }
 
@@ -165,10 +172,9 @@ const Task: React.FC<RouteComponentProps> = ({ history }) => {
         if (addingNewTask) {
           history.push(`/tasks/${taskToSave.id}`)
         } else {
-          setEditMode(false)
+          toggleEditMode()
         }
       })
-      clearCommandsContextSelection()
     })
   }
 
