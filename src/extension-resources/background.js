@@ -31,7 +31,7 @@ const createNewWindow = (url, callback) => {
 chrome.browserAction.onClicked.addListener(() => {
   onWindowClosedOrOpenedHandler(
     () =>
-      chrome.storage.local.set({ firstCommand: null }, () =>
+      chrome.storage.local.set({ contextSelectionCommands: null }, () =>
         createNewWindow('index.html#/tasks'),
       ),
     () => chrome.windows.update(windowId, { focused: true }),
@@ -40,7 +40,6 @@ chrome.browserAction.onClicked.addListener(() => {
 
 chrome.runtime.onMessage.addListener((request) => {
   if (request.eventName === 'command-copied') {
-    console.log(request.command)
     onWindowClosedOrOpenedHandler(
       () =>
         chrome.storage.local.set(
@@ -73,8 +72,6 @@ chrome.runtime.onMessage.addListener((request) => {
 
 function onClickHandler(info) {
   chrome.tabs.executeScript({ file: 'content.js' })
-
-  console.log('info', info.selectionText)
 }
 
 chrome.contextMenus.onClicked.addListener(onClickHandler)

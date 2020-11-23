@@ -78,7 +78,6 @@ const Task: React.FC<RouteComponentProps> = ({ history }) => {
 
   function setCommandFromContextSelection() {
     getCommandsFromContextSelection((commands: any) => {
-      console.log(commands)
       if (commands) {
         setCommandsCopy(
           commands.map((command: string | Command) =>
@@ -96,14 +95,19 @@ const Task: React.FC<RouteComponentProps> = ({ history }) => {
     })
   }
 
+  function getCommandsByContextSelection(request) {
+    if (request.eventName === 'copy-by-context-menu') {
+      setCommandFromContextSelection()
+    }
+  }
+
   useEffect(() => {
     setCommandFromContextSelection()
-    chrome.runtime.onMessage.addListener((request) => {
-      if (request.eventName === 'copy-by-context-menu') {
-        setCommandFromContextSelection()
-      }
-    })
-    return () => addingNewTask && clearCommandsContextSelection()
+    chrome.runtime.onMessage.addListener(getCommandsByContextSelection)
+    return () => {
+      chrome.runtime.onMessage.removeListener(getCommandsByContextSelection)
+      addingNewTask && clearCommandsContextSelection()
+    }
   }, [])
 
   function toggleEditMode() {

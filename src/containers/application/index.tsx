@@ -44,14 +44,17 @@ const Application: React.FC<RouteComponentProps> = ({ history }) => {
 
   useEffect(() => getLang(({ lang }) => setLang(lang || defaultLang)), [])
 
-  useEffect(() => {
-    chrome.runtime.onMessage.addListener((request) => {
-      if (request.eventName === 'copy-by-context-menu') {
-        if (!window.location.href.match(/new-task$/)) {
-          history.push('/new-task')
-        }
+  function redirectToNewTask(request) {
+    if (request.eventName === 'copy-by-context-menu') {
+      if (!window.location.href.match(/new-task$/)) {
+        history.push('/new-task')
       }
-    })
+    }
+  }
+
+  useEffect(() => {
+    chrome.runtime.onMessage.addListener(redirectToNewTask)
+    return () => chrome.runtime.onMessage.removeListener(redirectToNewTask)
   }, [])
 
   function onAddTopic(topicName: string) {

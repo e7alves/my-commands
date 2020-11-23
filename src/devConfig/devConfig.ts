@@ -83,6 +83,7 @@ global.chrome = {
   runtime: {
     onMessage: {
       addListener: (request) => request({ eventName: null }),
+      removeListener: () => null,
     },
   },
 }
