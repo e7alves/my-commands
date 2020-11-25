@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 
 import { updateTopics, deleteTopic } from '../../data/storageActions'
-import { Topic, TaskToSelect } from '../../data/dataTypes'
+import { Topic } from '../../data/dataTypes'
 
 import { Container } from './style'
 import TopicList from '../../components/lists/topicList'

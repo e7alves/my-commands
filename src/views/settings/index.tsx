@@ -15,11 +15,11 @@ import { Container, Section } from './style'
 import { HorizInputSection } from '../../components/inputs/style'
 import Label from '../../components/inputs/label'
 import SelectBox from '../../components/inputs/selectBox'
-import { SecondaryBtn, TextBtn } from '../../components/buttons'
+import { SecondaryBtn } from '../../components/buttons'
 import Radios from '../../components/inputs/radios'
-import FileUpload from '../../components/inputs/fileUpload'
 import ConfirmModal from '../../components/modal/confirmModal'
 import AlertModal from '../../components/modal/alertModal'
+import ImportDataModal from '../../components/modal/importDataModal'
 
 interface Props {
   theme: DefaultTheme
@@ -51,6 +51,9 @@ const Settings: React.FC<Props> = ({
     content: null,
     showOkButton: false,
   })
+  const [importDataModalIsOpen, setImportDataModalIsOpen] = useState<boolean>(
+    false,
+  )
 
   function onExportData() {
     getDataToExport((data) => {
@@ -61,17 +64,8 @@ const Settings: React.FC<Props> = ({
     })
   }
 
-  function onImportData(e: React.FormEvent<HTMLInputElement>) {
-    const fileReader = new FileReader()
-    fileReader.onload = () => {
-      try {
-        const data = JSON.parse(fileReader.result as string)
-        importData(data, () => window.location.reload())
-      } catch (error) {
-        window.alert('Invalid file content')
-      }
-    }
-    fileReader.readAsText(e.currentTarget.files[0])
+  function onImportDataButtonClick() {
+    setImportDataModalIsOpen(true)
   }
 
   function onClearDataButtonClick() {
@@ -132,11 +126,13 @@ const Settings: React.FC<Props> = ({
             <SecondaryBtn iconName="download" onClick={onExportData}>
               Export
             </SecondaryBtn>
-            <FileUpload
-              onChange={onImportData}
-              text="Import"
+            <SecondaryBtn
+              iconName="upload"
               style={{ marginLeft: '1rem' }}
-            />
+              onClick={onImportDataButtonClick}
+            >
+              Import
+            </SecondaryBtn>
             <SecondaryBtn
               iconName="delete-forever"
               style={{
@@ -165,6 +161,10 @@ const Settings: React.FC<Props> = ({
         title={alertModalMsg.title}
         onConfirm={() => window.location.reload()}
         showOkButton={alertModalMsg.showOkButton}
+      />
+      <ImportDataModal
+        isOpen={importDataModalIsOpen}
+        close={() => setImportDataModalIsOpen(false)}
       />
     </>
   )
