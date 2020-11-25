@@ -87,6 +87,7 @@ const CommandField: React.FC<Props> = ({
               ref={staticCommandFieldRef}
               defaultValue={command.command}
               onFocus={() => staticCommandFieldRef.current.blur()}
+              onDrop={(e) => e.preventDefault()}
             />
             <StaticCommandIcon>
               <Icon name="content-copy" />

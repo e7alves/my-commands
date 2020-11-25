@@ -40,7 +40,7 @@ const TaskList: React.FC<Props> = ({
         {tasks.map(({ id, name }, idx) => (
           <ListItem key={id}>
             <ListLink to={`/tasks/${id}`}>
-              {name}
+              <span>{name}</span>
               <RemoveAction>
                 <IconBtn
                   onClick={(e) => {

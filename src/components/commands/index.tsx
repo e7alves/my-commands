@@ -55,29 +55,31 @@ const Commands: React.FC<Props> = ({
   }
 
   return (
-    <CommandList>
-      {commands &&
-        commands.map((command, idx) => (
-          <CommandListItem key={command.id}>
-            <CommandDescription
-              editMode={editMode}
-              command={command}
-              index={idx}
-              onCommandChange={onCommandChange}
-            />
-            <CommandField
-              id={command.id}
-              editMode={editMode}
-              command={command}
-              index={idx}
-              onChangePosition={onChangePosition}
-              onDelete={onDelete}
-              onCommandChange={onCommandChange}
-            />
-          </CommandListItem>
-        ))}
+    <>
+      <CommandList>
+        {commands &&
+          commands.map((command, idx) => (
+            <CommandListItem key={command.id}>
+              <CommandDescription
+                editMode={editMode}
+                command={command}
+                index={idx}
+                onCommandChange={onCommandChange}
+              />
+              <CommandField
+                id={command.id}
+                editMode={editMode}
+                command={command}
+                index={idx}
+                onChangePosition={onChangePosition}
+                onDelete={onDelete}
+                onCommandChange={onCommandChange}
+              />
+            </CommandListItem>
+          ))}
+      </CommandList>
       {editMode && <AddCommandBtn onClick={onAddCommand} />}
-    </CommandList>
+    </>
   )
 }
 

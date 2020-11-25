@@ -173,6 +173,17 @@ const Task: React.FC<RouteComponentProps> = ({ history }) => {
             })
           }
         })
+      } else if (taskToSave.name !== task.name) {
+        topics.forEach((topic) => {
+          if (topic.id === task.topicId) {
+            topicsToUpdate.push({
+              ...topic,
+              tasks: topic.tasks.map((tk) =>
+                tk.id !== task.id ? tk : { ...tk, name: taskToSave.name },
+              ),
+            })
+          }
+        })
       }
       updateTopics(topicsToUpdate, () => {
         refreshTopics()
