@@ -22,6 +22,8 @@ import { AlignedContainer } from '../../styles/layout'
 
 import { TopicsContext, TopicsContextType } from '../../topicsContext'
 
+import useQuery from '../../useQuery'
+
 interface TaskParam {
   taskId: string
 }
@@ -48,6 +50,11 @@ const getTaskInfo = (task: TaskType) => {
 const Task: React.FC<RouteComponentProps> = ({ history }) => {
   const { taskId } = useParams<TaskParam>()
   const addingNewTask = !taskId
+
+  const defaultTopicId = useQuery().get('topicId')
+  if (defaultTopicId) {
+    taskInfoDefault.topicId = defaultTopicId
+  }
 
   const { topics, refreshTopics } = useContext<TopicsContextType>(TopicsContext)
 

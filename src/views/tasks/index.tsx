@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useLocation } from 'react-router-dom'
 
 import { deleteTask, updateTopics } from '../../data/storageActions'
-import { Topic, TaskToSelect } from '../../data/dataTypes'
+import { TaskToSelect } from '../../data/dataTypes'
 import { TOPIC_DEFAULT_ID } from '../../consts'
 
 import { Container } from './style'
@@ -14,9 +14,7 @@ import ConfirmModal from '../../components/modal/confirmModal'
 
 import { TopicsContext, TopicsContextType } from '../../topicsContext'
 
-function useQuery() {
-  return new URLSearchParams(useLocation().search)
-}
+import useQuery from '../../useQuery'
 
 const Tasks: React.FC = () => {
   const topicId = useQuery().get('topicId')
@@ -79,7 +77,12 @@ const Tasks: React.FC = () => {
             onChange={onSelectChange}
           />
         </HorizInputSection>
-        <TaskList tasks={tasks} title="Tasks" onDelete={onDeleteTask} />
+        <TaskList
+          tasks={tasks}
+          title="Tasks"
+          onDelete={onDeleteTask}
+          topicId={selectedTopicId}
+        />
       </Container>
     </>
   )

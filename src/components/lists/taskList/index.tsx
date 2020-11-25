@@ -15,12 +15,19 @@ interface ListItemType {
 interface Props {
   tasks: ListItemType[]
   title: string
+  topicId: string
   onDelete?: (idx: number) => void
   onEdit?: (idx: number) => void
   theme: DefaultTheme
 }
 
-const TaskList: React.FC<Props> = ({ tasks, title, onDelete, theme }) => {
+const TaskList: React.FC<Props> = ({
+  tasks,
+  title,
+  topicId,
+  onDelete,
+  theme,
+}) => {
   function renderList() {
     if (!tasks) {
       return null
@@ -59,7 +66,7 @@ const TaskList: React.FC<Props> = ({ tasks, title, onDelete, theme }) => {
           marginLeft: '10px',
         }}
       >
-        <LinkButton to="/new-task">
+        <LinkButton to={`/new-task?topicId=${topicId}`}>
           <Icon name="plus" />
         </LinkButton>
       </SquaredBtn>
