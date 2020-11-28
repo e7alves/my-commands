@@ -11,6 +11,7 @@ import {
   ListLink,
   RemoveAction,
   EditAction,
+  ListHeader,
 } from '../style'
 import { IconBtn, SquaredBtn } from '../../buttons'
 import Icon from '../../icon'
@@ -80,16 +81,22 @@ const TopicList: React.FC<Props> = ({
 
   return (
     <>
-      <Label>{title}</Label>
-      <SquaredBtn
-        style={{
-          backgroundColor: theme.secondaryButtonBtn,
-          marginLeft: '10px',
-        }}
-        onClick={onAdd}
-      >
-        <Icon name="plus" />
-      </SquaredBtn>
+      <ListHeader>
+        <Label>{title}</Label>
+        <SquaredBtn
+          backgroundColor={theme.secondaryButtonBg}
+          style={{
+            borderRadius: '3px',
+            color: theme.secondaryButtonTextColor,
+            height: 'inherit',
+            marginLeft: '10px',
+            width: '3rem',
+          }}
+          onClick={onAdd}
+        >
+          <Icon name="plus" />
+        </SquaredBtn>
+      </ListHeader>
       {renderList()}
     </>
   )

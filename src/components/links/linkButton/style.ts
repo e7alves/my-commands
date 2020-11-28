@@ -1,9 +1,17 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-export default styled(Link)`
+import hover from '../../../styles/backgroundHover'
+
+interface Props {
+  backgroundColor?: string
+}
+
+export default styled(Link)<Props>`
   align-items: center;
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.secondaryButtonTextColor};
+  background-color: ${({ backgroundColor }) =>
+    backgroundColor || 'transparent'};
   display: flex;
   height: 100%;
   justify-content: center;
@@ -12,4 +20,6 @@ export default styled(Link)`
   &:focus {
     outline: none;
   }
+  ${({ theme, backgroundColor }) =>
+    hover(backgroundColor || theme.actionButtonBg)}
 `

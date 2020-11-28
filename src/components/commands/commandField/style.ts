@@ -18,7 +18,7 @@ const Command = css`
   color: ${({ theme }) => theme.commandTextColor};
   position: relative;
   font-family: 'Courier_Prime', sans-serif;
-  font-size: 1rem;
+  font-size: 14px;
   max-width: 100%;
   min-width: 100%;
   padding: 12px;

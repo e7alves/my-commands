@@ -1,8 +1,14 @@
 import React from 'react'
 import { withTheme, DefaultTheme } from 'styled-components'
 
-import { StyledList, ListItem, ListLink, RemoveAction } from '../style'
-import { IconBtn, SquaredBtn } from '../../buttons'
+import {
+  StyledList,
+  ListItem,
+  ListLink,
+  RemoveAction,
+  ListHeader,
+} from '../style'
+import { IconBtn } from '../../buttons'
 import Icon from '../../icon'
 import { LinkButton } from '../../links'
 import Label from '../../inputs/label'
@@ -33,7 +39,13 @@ const TaskList: React.FC<Props> = ({
       return null
     }
     if (tasks.length === 0) {
-      return <p>Empty</p>
+      return (
+        <p
+          style={{ fontSize: '12px', fontStyle: 'italic', textAlign: 'center' }}
+        >
+          Empty
+        </p>
+      )
     }
     return (
       <StyledList>
@@ -59,17 +71,20 @@ const TaskList: React.FC<Props> = ({
 
   return (
     <>
-      <Label>{title}</Label>
-      <SquaredBtn
-        style={{
-          backgroundColor: theme.secondaryButtonBtn,
-          marginLeft: '10px',
-        }}
-      >
-        <LinkButton to={`/new-task?topicId=${topicId}`}>
+      <ListHeader>
+        <Label>{title}</Label>
+        <LinkButton
+          backgroundColor={theme.secondaryButtonBg}
+          style={{
+            borderRadius: '3px',
+            marginLeft: '10px',
+            width: '3rem',
+          }}
+          to={`/new-task?topicId=${topicId}`}
+        >
           <Icon name="plus" />
         </LinkButton>
-      </SquaredBtn>
+      </ListHeader>
       {renderList()}
     </>
   )

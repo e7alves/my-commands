@@ -1,8 +1,16 @@
 import styled from 'styled-components'
+import hover from '../../../styles/backgroundHover'
 
-export default styled.button`
-  background-color: ${({ theme }) => theme.actionButtonBg};
+interface Props {
+  backgroundColor?: string
+}
+
+export default styled.button<Props>`
+  background-color: ${({ theme, backgroundColor }) =>
+    backgroundColor || theme.actionButtonBg};
   color: ${({ theme }) => theme.text};
   width: 15px;
   height: 15px;
+  ${({ theme, backgroundColor }) =>
+    hover(backgroundColor || theme.actionButtonBg)}
 `

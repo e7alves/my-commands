@@ -68,7 +68,7 @@ const Tasks: React.FC = () => {
         onConfirm={onConfirmDeleteTask}
       />
       <Container>
-        <HorizInputSection>
+        <HorizInputSection style={{ marginBottom: '1.5rem' }}>
           <Label>Topics</Label>
           <SelectBox
             id="topic"

@@ -33,13 +33,7 @@ const ConfirmImportModal: React.FC<Props> = ({ isOpen, close }) => {
   }
 
   return (
-    <Modal
-      isOpen={isOpen}
-      title="Alert"
-      height="120px"
-      close={close}
-      shouldCloseOnOverlayClick={false}
-    >
+    <Modal isOpen={isOpen} title="Alert" height="120px" close={close}>
       <ModalContent>
         <AlertText>
           if you import data, all existing data will be removed

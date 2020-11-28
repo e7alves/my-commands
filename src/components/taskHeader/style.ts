@@ -9,7 +9,7 @@ interface Props {
 
 export const Container = styled.div<Props>`
   background-color: ${({ theme, editMode }) =>
-    editMode ? 'transparent' : shade(0.15, theme.background)};
+    editMode ? 'transparent' : theme.taskHeaderBg};
   font-size: 0.9rem;
 `
 

@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { shade } from 'polished'
 import { NavLink } from 'react-router-dom'
+import hover from '../../styles/backgroundHover'
 
 export default styled.nav`
   background-color: ${({ theme }) => theme.navbarBg};
@@ -13,9 +14,7 @@ export default styled.nav`
       list-style: none;
       min-width: 72px;
       text-align: center;
-      &:hover {
-        background-color: ${({ theme }) => shade(0.2, theme.navbarBg)};
-      }
+      ${({ theme }) => hover(theme.navbarBg, 0.2)}
     }
   }
 `

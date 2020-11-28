@@ -1,4 +1,3 @@
-import { string } from 'prop-types'
 import 'styled-components'
 
 declare module 'styled-components' {
@@ -8,6 +7,7 @@ declare module 'styled-components' {
     text2: string
     text3: string
     navbarBg: string
+    taskHeaderBg: string
     commandAreaBg: string
     commandDescriptionAreaBg: string
     commandTextColor: string
@@ -16,11 +16,20 @@ declare module 'styled-components' {
     commandToCopyFieldBg: string
     commandToCopyIconColor: string
     primaryButtonBg: string
-    secondaryButtonBtn: string
+    primaryButtonTextColor: string
+    primaryButtonBorderColor: string
+    secondaryButtonBg: string
+    secondaryButtonTextColor: string
     actionButtonBg: string
     cancelButtonBg: string
+    cancelButtonBorderColor: string
+    clearButtonBg: string
+    clearButtonBorderColor: string
     listBg: string
+    listHoverBg: string
+    listBorderColor: string
+    actionIconColor: string
     dangerColor: string
-    warnColor: string
+    transitionTime: string
   }
 }

@@ -123,12 +123,23 @@ const Settings: React.FC<Props> = ({
             <Label style={{ width: labelWidth }} htmlFor="lang">
               Data
             </Label>
-            <SecondaryBtn iconName="download" onClick={onExportData}>
+            <SecondaryBtn
+              iconName="download"
+              style={{
+                width: '5rem',
+                border: `1px solid ${theme.secondaryButtonBg}`,
+              }}
+              onClick={onExportData}
+            >
               Export
             </SecondaryBtn>
             <SecondaryBtn
               iconName="upload"
-              style={{ marginLeft: '1rem' }}
+              style={{
+                marginLeft: '1rem',
+                width: '5rem',
+                border: `1px solid ${theme.secondaryButtonBg}`,
+              }}
               onClick={onImportDataButtonClick}
             >
               Import
@@ -137,8 +148,11 @@ const Settings: React.FC<Props> = ({
               iconName="delete-forever"
               style={{
                 marginLeft: '1rem',
-                backgroundColor: theme.text,
+                backgroundColor: theme.clearButtonBg,
+                border: `1px solid ${theme.clearButtonBorderColor}`,
                 color: theme.dangerColor,
+                boxSizing: 'content-box',
+                width: '4rem',
               }}
               onClick={onClearDataButtonClick}
             >

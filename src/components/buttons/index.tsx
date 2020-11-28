@@ -15,6 +15,7 @@ interface Props {
   children?: React.ReactNode
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => unknown
   iconName?: string
+  backgroundColor?: string
 }
 
 const buttonFactory: (unknow) => React.FC<Props> = (
