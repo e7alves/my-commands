@@ -5,6 +5,7 @@ export const AppContainer = styled.div`
   height: 100vh;
   margin: 0 auto;
   max-width: 400px;
+  padding-bottom: 2.5rem;
 `
 
 export const AppWrapper = styled.div`

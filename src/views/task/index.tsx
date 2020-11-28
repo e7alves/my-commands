@@ -118,7 +118,9 @@ const Task: React.FC<RouteComponentProps> = ({ history, location }) => {
     chrome.runtime.onMessage.addListener(getCommandsByContextSelection)
     return () => {
       chrome.runtime.onMessage.removeListener(getCommandsByContextSelection)
-      addingNewTask && clearCommandsContextSelection()
+      if (!window.location.href.match(/new-task/)) {
+        clearCommandsContextSelection()
+      }
     }
   }, [])
 
