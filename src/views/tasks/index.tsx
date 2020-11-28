@@ -10,7 +10,7 @@ import { HorizInputSection } from '../../components/inputs/style'
 import TaskList from '../../components/lists/taskList'
 import Label from '../../components/inputs/label'
 import SelectBox from '../../components/inputs/selectBox'
-import ConfirmModal from '../../components/modal/confirmModal'
+import ConfirmModal from '../../components/modals/confirmModal'
 
 import { TopicsContext, TopicsContextType } from '../../topicsContext'
 

@@ -20,7 +20,7 @@ import Task from '../../views/task/index'
 import Tasks from '../../views/tasks'
 import Topics from '../../views/topics'
 import Settings from '../../views/settings'
-import AddAndEditTopicModal from '../../components/modal/addAndEditTopicModal'
+import AddAndEditTopicModal from '../../components/modals/addAndEditTopicModal'
 
 import GlobalStyle from '../../styles/GlobalStyle'
 import { AppContainer, AppWrapper } from './style'

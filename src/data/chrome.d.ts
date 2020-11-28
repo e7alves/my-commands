@@ -2,14 +2,14 @@ interface StorageResult {
   [value: string]: any
 }
 
-interface FakeStorage {
+interface StorageType {
   local: {
     get: (keys: string[], cb: (key: StorageResult) => void) => void
     set: (obj: Record<string, unknown>, callback?: () => void) => void
   }
 }
 
-interface FakeRuntime {
+interface RuntimeType {
   onMessage: {
     addListener: (request: any) => null
     removeListener: (request: any) => null
@@ -17,6 +17,6 @@ interface FakeRuntime {
 }
 
 declare namespace chrome {
-  export const storage: FakeStorage
-  export const runtime: FakeRuntime
+  export const storage: StorageType
+  export const runtime: RuntimeType
 }

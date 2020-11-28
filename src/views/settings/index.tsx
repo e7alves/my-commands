@@ -2,11 +2,7 @@ import React, { useContext, useState } from 'react'
 import { withTheme, DefaultTheme } from 'styled-components'
 import FileSaver from 'file-saver'
 
-import {
-  getDataToExport,
-  importData,
-  clearData,
-} from '../../data/storageActions'
+import { getDataToExport, clearData } from '../../data/storageActions'
 
 import { exportFileName } from '../../consts'
 import { langs, LangContext } from '../../lang/langConfig'
@@ -17,9 +13,9 @@ import Label from '../../components/inputs/label'
 import SelectBox from '../../components/inputs/selectBox'
 import { SecondaryBtn } from '../../components/buttons'
 import Radios from '../../components/inputs/radios'
-import ConfirmModal from '../../components/modal/confirmModal'
-import AlertModal from '../../components/modal/alertModal'
-import ImportDataModal from '../../components/modal/importDataModal'
+import ConfirmModal from '../../components/modals/confirmModal'
+import AlertModal from '../../components/modals/alertModal'
+import ImportDataModal from '../../components/modals/importDataModal'
 
 interface Props {
   theme: DefaultTheme

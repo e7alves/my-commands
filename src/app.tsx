@@ -6,7 +6,7 @@ import { HashRouter, Route } from 'react-router-dom'
 import Application from './containers/application'
 
 if (process.env.NODE_ENV === 'development') {
-  require('./devConfig/devConfig')
+  require('./data/devConfig')
 }
 
 ReactDOM.render(

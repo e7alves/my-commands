@@ -5,8 +5,8 @@ import { Topic } from '../../data/dataTypes'
 
 import { Container } from './style'
 import TopicList from '../../components/lists/topicList'
-import ConfirmModal from '../../components/modal/confirmModal'
-import AddAndEditTopicModal from '../../components/modal/addAndEditTopicModal'
+import ConfirmModal from '../../components/modals/confirmModal'
+import AddAndEditTopicModal from '../../components/modals/addAndEditTopicModal'
 
 import { TopicsContext, TopicsContextType } from '../../topicsContext'
 
