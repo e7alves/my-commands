@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import MainContainer from '../../styles/mainContainer'
+import { MainContainer } from '../../styles/layout'
 
 export const Container = styled(MainContainer)`
   padding-top: 1rem;

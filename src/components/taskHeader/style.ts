@@ -1,7 +1,6 @@
 import styled from 'styled-components'
-import { shade } from 'polished'
 
-import MainContainer from '../../styles/mainContainer'
+import { MainContainer } from '../../styles/layout'
 
 interface Props {
   editMode?: boolean

@@ -4,6 +4,11 @@ interface AlignedContainerProps {
   position: 'center' | 'right' | 'left'
 }
 
+export const MainContainer = styled.div`
+  width: 80%;
+  margin: 0 auto;
+`
+
 const getAlignByPosition = (position: string) => {
   switch (position) {
     case 'center':
@@ -19,5 +24,3 @@ export const AlignedContainer = styled.div<AlignedContainerProps>`
   display: flex;
   justify-content: ${({ position }) => getAlignByPosition(position)};
 `
-
-export const noop = null
