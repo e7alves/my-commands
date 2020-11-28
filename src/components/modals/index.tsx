@@ -7,7 +7,7 @@ import { ModalTitle } from './style'
 ReactModal.setAppElement('#app')
 
 const overlayStyle: React.CSSProperties = {
-  backgroundColor: 'rgba(0, 0, 0, 0.8)',
+  backgroundColor: 'rgba(0, 0, 0, 0.7)',
   bottom: 0,
   display: 'flex',
   justifyContent: 'center',

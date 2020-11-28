@@ -84,7 +84,7 @@ const Task: React.FC<RouteComponentProps> = ({ history }) => {
   }, [])
 
   function setCommandFromContextSelection() {
-    getCommandsFromContextSelection((commands: any) => {
+    getCommandsFromContextSelection((commands: any, link: string) => {
       if (commands) {
         setCommandsCopy(
           commands.map((command: string | Command) =>
@@ -97,6 +97,12 @@ const Task: React.FC<RouteComponentProps> = ({ history }) => {
               : command,
           ),
         )
+        if (!taskInfoCopy.link) {
+          setTaskInfoCopy({
+            ...taskInfoCopy,
+            link,
+          })
+        }
       }
     })
   }

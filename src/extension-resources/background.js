@@ -16,7 +16,7 @@ const createNewWindow = (url, callback) => {
     {
       url: chrome.runtime.getURL(url),
       type: 'popup',
-      width: 440,
+      width: 414,
       height: window.screen.height,
       left: window.screen.width,
       top: 0,
@@ -26,6 +26,12 @@ const createNewWindow = (url, callback) => {
       callback && callback()
     },
   )
+}
+
+const getCurrentTabURL = (callback) => {
+  chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
+    callback && callback(tabs[0].url)
+  })
 }
 
 chrome.browserAction.onClicked.addListener(() => {
@@ -42,10 +48,15 @@ chrome.runtime.onMessage.addListener((request) => {
   if (request.eventName === 'command-copied') {
     onWindowClosedOrOpenedHandler(
       () =>
-        chrome.storage.local.set(
-          { contextSelectionCommands: [request.command] },
-          createNewWindow('index.html#/new-task'),
-        ),
+        getCurrentTabURL((url) => {
+          chrome.storage.local.set(
+            {
+              contextSelectionCommands: [request.command],
+              link: url,
+            },
+            createNewWindow('index.html#/new-task'),
+          )
+        }),
       () => {
         chrome.storage.local.get((result) => {
           const newContextSelectionCommands = [
@@ -70,7 +81,7 @@ chrome.runtime.onMessage.addListener((request) => {
   }
 })
 
-function onClickHandler(info) {
+function onClickHandler() {
   chrome.tabs.executeScript({ file: 'content.js' })
 }
 

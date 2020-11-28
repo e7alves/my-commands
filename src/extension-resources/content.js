@@ -1,24 +1,23 @@
-/* eslint-disable */
-
-console.log('content')
-
 function getSelectionHtml() {
-  var html = "";
-  if (typeof window.getSelection != "undefined") {
-      var sel = window.getSelection();
-      if (sel.rangeCount) {
-          var container = document.createElement("div");
-          for (var i = 0, len = sel.rangeCount; i < len; ++i) {
-              container.appendChild(sel.getRangeAt(i).cloneContents());
-          }
-          html = container.innerHTML;
+  let html = ''
+  if (typeof window.getSelection !== 'undefined') {
+    const selection = window.getSelection()
+    if (selection.rangeCount) {
+      const container = document.createElement('div')
+      for (let i = 0, length = selection.rangeCount; i < length; i += 1) {
+        container.appendChild(selection.getRangeAt(i).cloneContents())
       }
-  } else if (typeof document.selection != "undefined") {
-      if (document.selection.type == "Text") {
-          html = document.selection.createRange().htmlText;
-      }
+      html = container.innerHTML
+    }
+  } else if (typeof document.selection !== 'undefined') {
+    if (document.selection.type === 'Text') {
+      html = document.selection.createRange().htmlText
+    }
   }
-  return html;
+  return html
 }
 
-chrome.runtime.sendMessage({ eventName: 'command-copied', command: getSelectionHtml() })
+chrome.runtime.sendMessage({
+  eventName: 'command-copied',
+  command: getSelectionHtml(),
+})
