@@ -33,5 +33,21 @@ const GlobalStyle = createGlobalStyle`
   .active-navlink {
     background-color: ${({ theme }) => shade(0.2, theme.navbarBg)};
   }
+
+  ::-webkit-scrollbar {
+    height: 5px;
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: ${({ theme }) => theme.scrollbarTrackColor};
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.scrollbarThumbColor};
+    :hover {
+      background: ${({ theme }) => shade(0.2, theme.scrollbarThumbColor)};
+    }
+  }
 `
 export default GlobalStyle

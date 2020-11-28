@@ -30,6 +30,8 @@ export default {
     listBorderColor: '#50647d',
     actionIconColor: '#999',
     dangerColor: '#e15a5a',
+    scrollbarTrackColor: '#e6e6e6',
+    scrollbarThumbColor: '#b8b8b8',
     transitionTime: '0.2s',
   },
   light: {
@@ -61,6 +63,8 @@ export default {
     listBorderColor: '#d0d0d0',
     actionIconColor: '#9a9a9a',
     dangerColor: '#ed2222',
+    scrollbarTrackColor: '#e6e6e6',
+    scrollbarThumbColor: '#b8b8b8',
     transitionTime: '0.2s',
   },
 }

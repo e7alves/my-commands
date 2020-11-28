@@ -30,6 +30,8 @@ declare module 'styled-components' {
     listBorderColor: string
     actionIconColor: string
     dangerColor: string
+    scrollbarTrackColor: string
+    scrollbarThumbColor: string
     transitionTime: string
   }
 }
