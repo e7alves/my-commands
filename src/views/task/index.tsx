@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { useParams, RouteComponentProps } from 'react-router-dom'
+import { useParams, useLocation, RouteComponentProps } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
 import htmlToFormattedText from 'html-to-formatted-text'
 
@@ -47,7 +47,7 @@ const getTaskInfo = (task: TaskType) => {
   return { topicId, name, link }
 }
 
-const Task: React.FC<RouteComponentProps> = ({ history }) => {
+const Task: React.FC<RouteComponentProps> = ({ history, location }) => {
   const { taskId } = useParams<TaskParam>()
   const addingNewTask = !taskId
 
@@ -83,8 +83,8 @@ const Task: React.FC<RouteComponentProps> = ({ history }) => {
     }
   }, [])
 
-  function setCommandFromContextSelection() {
-    getCommandsFromContextSelection((commands: any, link: string) => {
+  function setCommandsFromContextSelection() {
+    getCommandsFromContextSelection((commands: any) => {
       if (commands) {
         setCommandsCopy(
           commands.map((command: string | Command) =>
@@ -97,29 +97,23 @@ const Task: React.FC<RouteComponentProps> = ({ history }) => {
               : command,
           ),
         )
-        if (!taskInfoCopy.link) {
-          setTaskInfoCopy({
-            ...taskInfoCopy,
-            link,
-          })
-        }
       }
     })
   }
 
   function getCommandsByContextSelection(request) {
     if (request.eventName === 'copy-by-context-menu') {
-      if (!editMode) {
-        history.push('/new-task')
+      if (window.location.href.match(/editMode=true|new-task/)) {
+        setCommandsFromContextSelection()
       } else {
-        setCommandFromContextSelection()
+        history.push('/new-task')
       }
     }
   }
 
   useEffect(() => {
     if (addingNewTask) {
-      setCommandFromContextSelection()
+      setCommandsFromContextSelection()
     }
     chrome.runtime.onMessage.addListener(getCommandsByContextSelection)
     return () => {
@@ -131,8 +125,10 @@ const Task: React.FC<RouteComponentProps> = ({ history }) => {
   function toggleEditMode() {
     if (editMode) {
       clearCommandsContextSelection(() => setEditMode(!editMode))
+      history.replace(`${location.pathname}?editMode=false`)
     } else {
       updateCommandsContextSelection(commandsCopy, () => setEditMode(!editMode))
+      history.replace(`${location.pathname}?editMode=true`)
     }
   }
 

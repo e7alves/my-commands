@@ -47,7 +47,7 @@ const Application: React.FC<RouteComponentProps> = ({ history }) => {
   function redirectToNewTask(request) {
     if (request.eventName === 'copy-by-context-menu') {
       if (
-        !window.location.href.match(/new-task$/) &&
+        !window.location.href.match(/new-task/) &&
         !window.location.href.match(/tasks\/.+/)
       ) {
         history.push('/new-task')

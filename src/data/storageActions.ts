@@ -116,11 +116,11 @@ export const clearData = (callback?: () => void) => {
 }
 
 export const getCommandsFromContextSelection = (
-  callback?: (commands: string[] | Command[], link: string) => void,
+  callback?: (commands: string[] | Command[]) => void,
 ) => {
   chrome.storage.local.get(['contextSelectionCommands', 'link'], (result) => {
     const { contextSelectionCommands, link } = result
-    callback && callback(contextSelectionCommands, link)
+    callback && callback(contextSelectionCommands)
   })
 }
 
