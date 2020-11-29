@@ -162,7 +162,7 @@ const Settings: React.FC<Props> = ({
         isOpen={confirmModalIsOpen}
         close={() => setConfirmModalIsOpen(false)}
         content=""
-        title="Are you sure you want to delete all data"
+        title={messages['text.deleteDataAlert']}
         onConfirm={onClearData}
       />
       <AlertModal

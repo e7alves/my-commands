@@ -20,8 +20,12 @@ export default {
     'label.link': 'Link',
     'label.save': 'Save',
     'label.addDescription': 'Add description',
+    'label.alert': 'Alert',
     'text.deleteTaskAlert': 'Are you sure you want to delete this task?',
     'text.deleteTopicAlert': 'Are you sure you want to delete this topic?',
+    'text.importDataAlert':
+      'if you import data, all existing data will be removed',
+    'text.deleteDataAlert': 'Are you sure you want to delete all data?',
   },
   pt: {
     'label.tasks': 'Tarefas',
@@ -44,7 +48,11 @@ export default {
     'label.link': 'Link',
     'label.save': 'Salvar',
     'label.addDescription': 'Inserir descrição',
+    'label.alert': 'Atenção',
     'text.deleteTaskAlert': 'Tem certeza que deseja excluir esta tarefa?',
     'text.deleteTopicAlert': 'Tem certeza que deseja excluir este tópico?',
+    'text.importDataAlert':
+      'Se você fizer a importação, todos os dados existentes serão apagados',
+    'text.deleteDataAlert': 'Tem certeza que deseja excluir todos os dados?',
   },
 }

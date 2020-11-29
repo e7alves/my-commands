@@ -1,4 +1,6 @@
-import React, { useRef } from 'react'
+import React, { useContext, useRef } from 'react'
+
+import { LangContext } from '../../../lang/langConfig'
 
 import { importData } from '../../../data/storageActions'
 
@@ -13,6 +15,8 @@ interface Props {
 }
 
 const ConfirmImportModal: React.FC<Props> = ({ isOpen, close }) => {
+  const messages = useContext(LangContext)
+
   const fileUploadRef = useRef(null)
 
   function onImportButtonClick() {
@@ -33,14 +37,24 @@ const ConfirmImportModal: React.FC<Props> = ({ isOpen, close }) => {
   }
 
   return (
-    <Modal isOpen={isOpen} title="Alert" height="120px" close={close}>
+    <Modal
+      isOpen={isOpen}
+      title={messages['label.alert']}
+      height="120px"
+      close={close}
+    >
       <ModalContent>
-        <AlertText>
-          if you import data, all existing data will be removed
-        </AlertText>
+        <AlertText>{messages['text.importDataAlert']}</AlertText>
         <ButtonsPanel>
-          <CancelBtn onClick={close}>cancel</CancelBtn>
-          <PrimaryBtn onClick={onImportButtonClick}>Import</PrimaryBtn>
+          <CancelBtn onClick={close} style={{ marginRight: '0.2rem' }}>
+            {messages['label.cancel']}
+          </CancelBtn>
+          <PrimaryBtn
+            onClick={onImportButtonClick}
+            style={{ marginLeft: '0.2rem' }}
+          >
+            {messages['label.import']}
+          </PrimaryBtn>
           <FileUploadButton
             type="file"
             ref={fileUploadRef}
