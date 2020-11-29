@@ -1,4 +1,6 @@
-import React, { useMemo } from 'react'
+import React, { useContext, useMemo } from 'react'
+
+import { LangContext } from '../../lang/langConfig'
 
 import { TaskInfo, Topic } from '../../data/dataTypes'
 
@@ -22,9 +24,11 @@ const TaskHeader: React.FC<Props> = ({
   taskInfo,
   setTaskInfo,
 }) => {
+  const messages = useContext(LangContext)
+
   function renderLabel(text: string, htmlFor?: string) {
     return (
-      <Label htmlFor={htmlFor} style={{ width: '2rem' }}>
+      <Label htmlFor={htmlFor} style={{ width: '2.9rem' }}>
         {text}
       </Label>
     )
@@ -57,7 +61,7 @@ const TaskHeader: React.FC<Props> = ({
         {editMode ? (
           <>
             <HorizInputSection>
-              {renderLabel('Topic', 'topic')}
+              {renderLabel(messages['label.topic'], 'topic')}
               <SelectBox
                 id="topic"
                 options={topics}
@@ -66,7 +70,7 @@ const TaskHeader: React.FC<Props> = ({
               />
             </HorizInputSection>
             <HorizInputSection>
-              {renderLabel('Task', 'task')}
+              {renderLabel(messages['label.task'], 'task')}
               <TextField
                 id="task"
                 name="name"
@@ -76,7 +80,7 @@ const TaskHeader: React.FC<Props> = ({
               />
             </HorizInputSection>
             <HorizInputSection>
-              {renderLabel('Link', 'link')}
+              {renderLabel(messages['label.link'], 'link')}
               <TextField
                 id="link"
                 name="link"

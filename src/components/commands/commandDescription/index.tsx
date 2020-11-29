@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+
+import { LangContext } from '../../../lang/langConfig'
 
 import { Command } from '../../../data/dataTypes'
 
@@ -18,6 +20,8 @@ const CommandDescription: React.FC<Props> = ({
   editMode,
   onCommandChange,
 }) => {
+  const messages = useContext(LangContext)
+
   const [showDescription, setShowDescription] = useState<boolean>(false)
 
   useEffect(() => setShowDescription(false), [editMode])
@@ -36,7 +40,7 @@ const CommandDescription: React.FC<Props> = ({
         <EditableDescription value={description} onChange={onChangeHandler} />
       ) : (
         <TextBtn onClick={() => setShowDescription(true)}>
-          Add description
+          {messages['label.addDescription']}
         </TextBtn>
       )
     }

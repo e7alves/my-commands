@@ -26,6 +26,7 @@ const TextField: React.FC<Props> = ({
       name={name}
       onChange={onChange}
       autoFocus={autoFocus}
+      autoComplete="off"
     />
   </Wrapper>
 )

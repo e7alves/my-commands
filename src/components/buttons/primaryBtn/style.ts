@@ -9,7 +9,8 @@ export default styled.button`
   border-radius: 15px;
   color: ${({ theme }) => theme.primaryButtonTextColor};
   font-size: 1rem;
-  padding: 0.2rem 2rem;
+  flex: 1;
+  padding: 0.2rem 1rem;
   text-transform: uppercase;
   ${({ theme }) => hover(theme.primaryButtonBg)}
 `

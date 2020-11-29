@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
+
+import { LangContext } from '../../../lang/langConfig'
 
 import Modal from '..'
 import { ModalContent, ConfirmText } from './style'
@@ -21,20 +23,28 @@ const ConfirmModal: React.FC<Props> = ({
   title,
   content,
   onConfirm,
-}) => (
-  <Modal isOpen={isOpen} title={title} height="120px" close={close}>
-    <ModalContent>
-      <ConfirmText>
-        {content && content.length > 80
-          ? `${content.slice(0, 80)}...`
-          : content}
-      </ConfirmText>
-      <ButtonsPanel>
-        <CancelBtn onClick={close}>cancel</CancelBtn>
-        <PrimaryBtn onClick={onConfirm}>confirm</PrimaryBtn>
-      </ButtonsPanel>
-    </ModalContent>
-  </Modal>
-)
+}) => {
+  const messages = useContext(LangContext)
+
+  return (
+    <Modal isOpen={isOpen} title={title} height="120px" close={close}>
+      <ModalContent>
+        <ConfirmText>
+          {content && content.length > 80
+            ? `${content.slice(0, 80)}...`
+            : content}
+        </ConfirmText>
+        <ButtonsPanel>
+          <CancelBtn onClick={close} style={{ marginRight: '0.2rem' }}>
+            {messages['label.cancel']}
+          </CancelBtn>
+          <PrimaryBtn onClick={onConfirm} style={{ marginLeft: '0.2rem' }}>
+            {messages['label.confirm']}
+          </PrimaryBtn>
+        </ButtonsPanel>
+      </ModalContent>
+    </Modal>
+  )
+}
 
 export default ConfirmModal

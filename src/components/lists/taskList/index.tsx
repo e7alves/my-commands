@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { withTheme, DefaultTheme } from 'styled-components'
+
+import { LangContext } from '../../../lang/langConfig'
 
 import {
   StyledList,
@@ -20,20 +22,15 @@ interface ListItemType {
 
 interface Props {
   tasks: ListItemType[]
-  title: string
   topicId: string
   onDelete?: (idx: number) => void
   onEdit?: (idx: number) => void
   theme: DefaultTheme
 }
 
-const TaskList: React.FC<Props> = ({
-  tasks,
-  title,
-  topicId,
-  onDelete,
-  theme,
-}) => {
+const TaskList: React.FC<Props> = ({ tasks, topicId, onDelete, theme }) => {
+  const messages = useContext(LangContext)
+
   function renderList() {
     if (!tasks) {
       return null
@@ -43,7 +40,7 @@ const TaskList: React.FC<Props> = ({
         <p
           style={{ fontSize: '12px', fontStyle: 'italic', textAlign: 'center' }}
         >
-          Empty
+          {messages['label.emptyList']}
         </p>
       )
     }
@@ -72,7 +69,7 @@ const TaskList: React.FC<Props> = ({
   return (
     <>
       <ListHeader>
-        <Label>{title}</Label>
+        <Label>{messages['label.tasks']}</Label>
         <LinkButton
           backgroundColor={theme.secondaryButtonBg}
           style={{

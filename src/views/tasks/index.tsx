@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { useLocation } from 'react-router-dom'
+
+import { LangContext } from '../../lang/langConfig'
 
 import { deleteTask, updateTopics } from '../../data/storageActions'
 import { TaskToSelect } from '../../data/dataTypes'
@@ -17,6 +18,8 @@ import { TopicsContext, TopicsContextType } from '../../topicsContext'
 import useQuery from '../../useQuery'
 
 const Tasks: React.FC = () => {
+  const messages = useContext(LangContext)
+
   const topicId = useQuery().get('topicId')
 
   const { topics, refreshTopics } = useContext<TopicsContextType>(TopicsContext)
@@ -63,13 +66,13 @@ const Tasks: React.FC = () => {
       <ConfirmModal
         isOpen={modalIsOpen}
         close={() => setModalIsOpen(false)}
-        title="Are you sure you want to delete this task:"
+        title={messages['text.deleteTaskAlert']}
         content={taskToDelete && taskToDelete.name}
         onConfirm={onConfirmDeleteTask}
       />
       <Container>
         <HorizInputSection style={{ marginBottom: '1.5rem' }}>
-          <Label>Topics</Label>
+          <Label>{messages['label.topics']}</Label>
           <SelectBox
             id="topic"
             options={topics}
@@ -79,7 +82,6 @@ const Tasks: React.FC = () => {
         </HorizInputSection>
         <TaskList
           tasks={tasks}
-          title="Tasks"
           onDelete={onDeleteTask}
           topicId={selectedTopicId}
         />

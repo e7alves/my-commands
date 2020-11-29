@@ -24,7 +24,8 @@ import AddAndEditTopicModal from '../../components/modals/addAndEditTopicModal'
 
 import GlobalStyle from '../../styles/GlobalStyle'
 import { AppContainer, AppWrapper } from './style'
-import { defaultLang, LangContext, messageBundle } from '../../lang/langConfig'
+import { defaultLang, LangContext } from '../../lang/langConfig'
+import messageBundle from '../../lang/messageBundle'
 
 import { TopicsContext } from '../../topicsContext'
 
@@ -33,6 +34,8 @@ const Application: React.FC<RouteComponentProps> = ({ history }) => {
   const [addTopicModalIsOpen, setAddTopicModalIsOpen] = useState<boolean>(false)
   const [theme, setTheme] = useState<string>(themeDefault)
   const [lang, setLang] = useState<string>(defaultLang)
+
+  const messages = messageBundle[lang]
 
   function refreshTopics() {
     listTopics((newTopics) => setTopics([...newTopics]))
@@ -86,7 +89,7 @@ const Application: React.FC<RouteComponentProps> = ({ history }) => {
 
   return (
     <ThemeProvider theme={themes[theme]}>
-      <LangContext.Provider value={messageBundle[lang]}>
+      <LangContext.Provider value={messages}>
         <TopicsContext.Provider
           value={{
             topics,
@@ -126,7 +129,7 @@ const Application: React.FC<RouteComponentProps> = ({ history }) => {
                 isOpen={addTopicModalIsOpen}
                 close={() => setAddTopicModalIsOpen(false)}
                 content=""
-                title="New topic"
+                title={messages['label.newTopic']}
                 onConfirm={onAddTopic}
               />
             </AppWrapper>

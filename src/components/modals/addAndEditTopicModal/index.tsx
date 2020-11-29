@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+
+import { LangContext } from '../../../lang/langConfig'
 
 import Modal from '..'
 import { ModalContent, TextFieldWrapper } from './style'
@@ -21,6 +23,8 @@ const AddAndEditTopicModal: React.FC<Props> = ({
   title,
   onConfirm,
 }) => {
+  const messages = useContext(LangContext)
+
   const [topicName, setTopicName] = useState('')
 
   useEffect(() => setTopicName(content), [content])
@@ -41,8 +45,12 @@ const AddAndEditTopicModal: React.FC<Props> = ({
           <TextField value={topicName} onChange={onTextChange} />
         </TextFieldWrapper>
         <ButtonsPanel>
-          <CancelBtn onClick={close}>cancel</CancelBtn>
-          <PrimaryBtn onClick={onClickButton}>confirm</PrimaryBtn>
+          <CancelBtn onClick={close} style={{ marginLeft: '0.2rem' }}>
+            {messages['label.cancel']}
+          </CancelBtn>
+          <PrimaryBtn onClick={onClickButton} style={{ marginLeft: '0.2rem' }}>
+            {messages['label.confirm']}
+          </PrimaryBtn>
         </ButtonsPanel>
       </ModalContent>
     </Modal>

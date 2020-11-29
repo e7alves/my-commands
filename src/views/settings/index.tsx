@@ -106,7 +106,9 @@ const Settings: React.FC<Props> = ({
         </Section>
         <Section>
           <HorizInputSection>
-            <Label style={{ width: labelWidth }}>Theme</Label>
+            <Label style={{ width: labelWidth }}>
+              {messages['label.theme']}
+            </Label>
             <Radios
               options={['dark', 'light']}
               onChange={(theme) => updateTheme(theme)}
@@ -116,44 +118,43 @@ const Settings: React.FC<Props> = ({
         </Section>
         <Section>
           <HorizInputSection>
-            <Label style={{ width: labelWidth }} htmlFor="lang">
-              Data
+            <Label style={{ width: labelWidth }}>
+              {messages['label.data']}
             </Label>
-            <SecondaryBtn
-              iconName="download"
-              style={{
-                width: '5rem',
-                border: `1px solid ${theme.secondaryButtonBg}`,
-              }}
-              onClick={onExportData}
-            >
-              Export
-            </SecondaryBtn>
-            <SecondaryBtn
-              iconName="upload"
-              style={{
-                marginLeft: '1rem',
-                width: '5rem',
-                border: `1px solid ${theme.secondaryButtonBg}`,
-              }}
-              onClick={onImportDataButtonClick}
-            >
-              Import
-            </SecondaryBtn>
-            <SecondaryBtn
-              iconName="delete-forever"
-              style={{
-                marginLeft: '1rem',
-                backgroundColor: theme.clearButtonBg,
-                border: `1px solid ${theme.clearButtonBorderColor}`,
-                color: theme.dangerColor,
-                boxSizing: 'content-box',
-                width: '4rem',
-              }}
-              onClick={onClearDataButtonClick}
-            >
-              Clear
-            </SecondaryBtn>
+            <HorizInputSection>
+              <SecondaryBtn
+                iconName="download"
+                style={{
+                  border: `1px solid ${theme.secondaryButtonBg}`,
+                }}
+                onClick={onExportData}
+              >
+                {messages['label.export']}
+              </SecondaryBtn>
+              <SecondaryBtn
+                iconName="upload"
+                style={{
+                  marginLeft: '1rem',
+                  border: `1px solid ${theme.secondaryButtonBg}`,
+                }}
+                onClick={onImportDataButtonClick}
+              >
+                {messages['label.import']}
+              </SecondaryBtn>
+              <SecondaryBtn
+                iconName="delete-forever"
+                style={{
+                  marginLeft: '1rem',
+                  backgroundColor: theme.clearButtonBg,
+                  border: `1px solid ${theme.clearButtonBorderColor}`,
+                  color: theme.dangerColor,
+                  boxSizing: 'content-box',
+                }}
+                onClick={onClearDataButtonClick}
+              >
+                {messages['label.clearData']}
+              </SecondaryBtn>
+            </HorizInputSection>
           </HorizInputSection>
         </Section>
       </Container>

@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { useParams, useLocation, RouteComponentProps } from 'react-router-dom'
+import { useParams, RouteComponentProps } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
 import htmlToFormattedText from 'html-to-formatted-text'
+
+import { LangContext } from '../../lang/langConfig'
 
 import { Command, TaskInfo, Task as TaskType } from '../../data/dataTypes'
 import {
@@ -48,6 +50,8 @@ const getTaskInfo = (task: TaskType) => {
 }
 
 const Task: React.FC<RouteComponentProps> = ({ history, location }) => {
+  const messages = useContext(LangContext)
+
   const { taskId } = useParams<TaskParam>()
   const addingNewTask = !taskId
 
@@ -213,7 +217,7 @@ const Task: React.FC<RouteComponentProps> = ({ history, location }) => {
           <Section>
             <AlignedContainer position="right">
               <SecondaryBtn onClick={toggleEditMode} iconName="pencil">
-                Edit
+                {messages['label.edit']}
               </SecondaryBtn>
             </AlignedContainer>
           </Section>
@@ -231,13 +235,13 @@ const Task: React.FC<RouteComponentProps> = ({ history, location }) => {
               style={{ flex: 1, marginRight: '5px' }}
               onClick={onCancelEdition}
             >
-              cancel
+              {messages['label.cancel']}
             </CancelBtn>
             <PrimaryBtn
               style={{ flex: 1, marginLeft: '5px' }}
               onClick={onSaveEdition}
             >
-              save
+              {messages['label.save']}
             </PrimaryBtn>
           </AlignedContainer>
         )}

@@ -1,5 +1,7 @@
 import React, { useState, useContext } from 'react'
 
+import { LangContext } from '../../lang/langConfig'
+
 import { updateTopics, deleteTopic } from '../../data/storageActions'
 import { Topic } from '../../data/dataTypes'
 
@@ -11,6 +13,8 @@ import AddAndEditTopicModal from '../../components/modals/addAndEditTopicModal'
 import { TopicsContext, TopicsContextType } from '../../topicsContext'
 
 const Topics: React.FC = () => {
+  const messages = useContext(LangContext)
+
   const { topics, refreshTopics, switchAddTopicModal } = useContext<
     TopicsContextType
   >(TopicsContext)
@@ -52,20 +56,20 @@ const Topics: React.FC = () => {
         isOpen={confirmModalIsOpen}
         close={() => setConfirmModalIsOpen(false)}
         content={selectedTopic && selectedTopic.name}
-        title="Are you sure you want to delete this topic:"
+        title={messages['text.deleteTopicAlert']}
         onConfirm={onConfirmDeleteTopic}
       />
       <AddAndEditTopicModal
         isOpen={editTopicModalIsOpen}
         close={() => setEditTopicModalIsOpen(false)}
         content={selectedTopic && selectedTopic.name}
-        title="Rename topic"
+        title={messages['label.renameTopic']}
         onConfirm={onConfirmEditOrAddTopic}
       />
       <Container>
         <TopicList
           topics={topics}
-          title="Topics"
+          title={messages['label.topics']}
           onDelete={onDeleteTopic}
           onEdit={onEditTopic}
           onAdd={() => switchAddTopicModal(true)}

@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
+
+import { LangContext } from '../../lang/langConfig'
 
 import StyledNavbar, { Navlink } from './style'
-import { LinkButton } from '../links'
 import Icon from '../icon/index'
 import { TransparentBtn } from '../buttons'
 
@@ -11,57 +12,61 @@ interface Props {
   openAddTopicModal: () => void
 }
 
-const Navbar: React.FC<Props> = ({ openAddTopicModal }) => (
-  <StyledNavbar>
-    <ul>
-      <li>
-        <Navlink
-          to="/tasks"
-          style={{ fontSize }}
-          activeClassName="active-navlink"
-        >
-          <Icon name="format-list-bulleted" />
-          Tasks
-        </Navlink>
-      </li>
-      <li>
-        <Navlink
-          to="/topics"
-          style={{ fontSize }}
-          activeClassName="active-navlink"
-        >
-          <Icon name="format-list-bulleted" />
-          Topics
-        </Navlink>
-      </li>
-      <li>
-        <Navlink
-          to="/new-task"
-          style={{ fontSize }}
-          activeClassName="active-navlink"
-        >
-          <Icon name="plus" />
-          Task
-        </Navlink>
-      </li>
-      <li>
-        <TransparentBtn style={{ fontSize }} onClick={openAddTopicModal}>
-          <Icon name="plus" />
-          Topic
-        </TransparentBtn>
-      </li>
-      <li>
-        <Navlink
-          to="/settings"
-          style={{ fontSize }}
-          activeClassName="active-navlink"
-        >
-          <Icon name="cog" />
-          Settings
-        </Navlink>
-      </li>
-    </ul>
-  </StyledNavbar>
-)
+const Navbar: React.FC<Props> = ({ openAddTopicModal }) => {
+  const messages = useContext(LangContext)
+
+  return (
+    <StyledNavbar>
+      <ul>
+        <li>
+          <Navlink
+            to="/tasks"
+            style={{ fontSize }}
+            activeClassName="active-navlink"
+          >
+            <Icon name="format-list-bulleted" />
+            {messages['label.tasks']}
+          </Navlink>
+        </li>
+        <li>
+          <Navlink
+            to="/topics"
+            style={{ fontSize }}
+            activeClassName="active-navlink"
+          >
+            <Icon name="format-list-bulleted" />
+            {messages['label.topics']}
+          </Navlink>
+        </li>
+        <li>
+          <Navlink
+            to="/new-task"
+            style={{ fontSize }}
+            activeClassName="active-navlink"
+          >
+            <Icon name="plus" />
+            {messages['label.task']}
+          </Navlink>
+        </li>
+        <li>
+          <TransparentBtn style={{ fontSize }} onClick={openAddTopicModal}>
+            <Icon name="plus" />
+            {messages['label.topic']}
+          </TransparentBtn>
+        </li>
+        <li>
+          <Navlink
+            to="/settings"
+            style={{ fontSize }}
+            activeClassName="active-navlink"
+          >
+            <Icon name="cog" />
+            {messages['label.settings']}
+          </Navlink>
+        </li>
+      </ul>
+    </StyledNavbar>
+  )
+}
 
 export default Navbar
