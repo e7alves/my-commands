@@ -22,7 +22,7 @@ import Topics from '../../views/topics'
 import Settings from '../../views/settings'
 import AddAndEditTopicModal from '../../components/modals/addAndEditTopicModal'
 
-import GlobalStyle from '../../styles/GlobalStyle'
+import GlobalStyle from '../../styles/globalStyle'
 import { AppContainer, AppWrapper } from './style'
 import { defaultLang, LangContext } from '../../lang/langConfig'
 import messageBundle from '../../lang/messageBundle'
