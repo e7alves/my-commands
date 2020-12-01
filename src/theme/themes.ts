@@ -1,4 +1,4 @@
-export const themeDefault = 'light'
+export const themeDefault = 'dark'
 
 export default {
   dark: {
@@ -14,7 +14,7 @@ export default {
     inputBorderColor: '#0594FF',
     readModeCommandBorderColor: '#7030A0',
     commandToCopyFieldBg: '#435369',
-    commandToCopyIconColor: '#999',
+    commandToCopyIconColor: '#ba8cdd',
     primaryButtonBg: '#512373',
     primaryButtonTextColor: '#fff',
     primaryButtonBorderColor: '#944dc9',

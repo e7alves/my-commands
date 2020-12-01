@@ -85,10 +85,12 @@ const CommandField: React.FC<Props> = ({
             <StaticCommandField
               id={id}
               ref={staticCommandFieldRef}
-              defaultValue={command.command}
-              onFocus={() => staticCommandFieldRef.current.blur()}
               onDrop={(e) => e.preventDefault()}
-            />
+            >
+              {command.command.split('\n').map((str) => (
+                <div>{str}</div>
+              ))}
+            </StaticCommandField>
             <StaticCommandIcon>
               <Icon name="content-copy" />
             </StaticCommandIcon>

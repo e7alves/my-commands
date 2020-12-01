@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { lighten } from 'polished'
+import { rgba } from 'polished'
 
 import courierFont from '../../../assets/fonts/CourierPrime-Regular.ttf'
 
@@ -21,7 +21,8 @@ const Command = css`
   font-size: 14px;
   max-width: 100%;
   min-width: 100%;
-  padding: 12px;
+  overflow-y: hidden;
+  padding: 12px 0 12px 12px;
   width: 100%;
   span {
     color: ${({ theme }) => theme.text2};
@@ -42,7 +43,7 @@ export const EditableCommand = styled.textarea`
   white-space: nowrap;
 `
 
-export const StaticCommandField = styled.textarea`
+export const StaticCommandField = styled.pre`
   ${Command};
   border: solid 2px ${({ theme }) => theme.readModeCommandBorderColor};
   height: inherit;
@@ -51,11 +52,14 @@ export const StaticCommandField = styled.textarea`
 `
 
 export const StaticCommandIcon = styled.span`
+  background-color: ${({ theme }) => rgba(theme.commandAreaBg, 0.7)};
+  border-radius: 3px;
   cursor: pointer;
   display: none;
   font-size: 1.2rem;
+  padding: 0 8px 2px;
   position: absolute;
-  right: 10px;
+  right: 2px;
   span {
     color: ${({ theme }) => theme.commandToCopyIconColor};
   }
@@ -68,7 +72,6 @@ export const StaticCommandWrapper = styled.span`
   width: 100%;
   &:hover {
     ${StaticCommandField} {
-      background-color: ${({ theme }) => theme.commandToCopyFieldBg};
       cursor: pointer;
     }
     ${StaticCommandIcon} {
@@ -77,8 +80,10 @@ export const StaticCommandWrapper = styled.span`
   }
   &:active {
     ${StaticCommandField} {
-      background-color: ${({ theme }) =>
-        lighten(0.05, theme.commandToCopyFieldBg)};
+      background-color: ${({ theme }) => theme.commandToCopyFieldBg};
+    }
+    ${StaticCommandIcon} {
+      background-color: transparent;
     }
   }
 `
