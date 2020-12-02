@@ -100,7 +100,10 @@ const Application: React.FC<RouteComponentProps> = ({ history }) => {
           <AppContainer>
             <AppWrapper>
               <GlobalStyle />
-              <Navbar openAddTopicModal={() => setAddTopicModalIsOpen(true)} />
+              <Navbar
+                openAddTopicModal={() => setAddTopicModalIsOpen(true)}
+                history={history}
+              />
               <Switch>
                 <Route path="/topics" exact component={Topics} />
                 <Route path="/tasks" exact component={Tasks} />

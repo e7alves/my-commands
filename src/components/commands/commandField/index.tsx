@@ -87,8 +87,9 @@ const CommandField: React.FC<Props> = ({
               ref={staticCommandFieldRef}
               onDrop={(e) => e.preventDefault()}
             >
-              {command.command.split('\n').map((str) => (
-                <div>{str}</div>
+              {command.command.split('\n').map((str, idx) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <div key={idx}>{str}</div>
               ))}
             </StaticCommandField>
             <StaticCommandIcon>

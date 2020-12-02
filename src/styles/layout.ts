@@ -5,7 +5,7 @@ interface AlignedContainerProps {
 }
 
 export const MainContainer = styled.div`
-  width: 80%;
+  width: 85%;
   margin: 0 auto;
 `
 

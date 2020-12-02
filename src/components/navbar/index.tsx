@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import { History } from 'history'
 
 import { LangContext } from '../../lang/langConfig'
 
@@ -10,14 +11,20 @@ const fontSize = '12px'
 
 interface Props {
   openAddTopicModal: () => void
+  history: History
 }
 
-const Navbar: React.FC<Props> = ({ openAddTopicModal }) => {
+const Navbar: React.FC<Props> = ({ openAddTopicModal, history }) => {
   const messages = useContext(LangContext)
 
   return (
     <StyledNavbar>
       <ul>
+        <li style={{ minWidth: 0, padding: '0 2px' }}>
+          <TransparentBtn onClick={history.goBack}>
+            <Icon name="chevron-left" fontSize="20px" />
+          </TransparentBtn>
+        </li>
         <li>
           <Navlink
             to="/tasks"
@@ -63,6 +70,11 @@ const Navbar: React.FC<Props> = ({ openAddTopicModal }) => {
             <Icon name="cog" />
             {messages['label.settings']}
           </Navlink>
+        </li>
+        <li style={{ minWidth: 0, padding: '0 2px' }}>
+          <TransparentBtn onClick={history.goForward}>
+            <Icon name="chevron-right" fontSize="20px" />
+          </TransparentBtn>
         </li>
       </ul>
     </StyledNavbar>

@@ -12,7 +12,7 @@ function onWindowClosedOrOpenedHandler(onWindowClosed, onWindowOpened) {
 }
 
 const createNewWindow = (url, callback) => {
-  const width = 414
+  const width = 500
   chrome.windows.create(
     {
       url: chrome.runtime.getURL(url),
