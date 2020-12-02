@@ -8,6 +8,11 @@ const fakeStorage = {
       tasks: [],
     },
     {
+      id: '3',
+      name: 'Docker',
+      tasks: [],
+    },
+    {
       id: '2',
       name: 'Linux',
       tasks: [
@@ -20,11 +25,6 @@ const fakeStorage = {
           name: 'How to list users in linux',
         },
       ],
-    },
-    {
-      id: '3',
-      name: 'Docker',
-      tasks: [],
     },
   ],
   t1: {

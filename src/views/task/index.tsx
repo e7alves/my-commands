@@ -14,6 +14,8 @@ import {
   updateCommandsContextSelection,
   clearCommandsContextSelection,
 } from '../../data/storageActions'
+import sortByName from '../../data/sortByName'
+
 import { TOPIC_DEFAULT_ID } from '../../consts'
 
 import { Container, Section } from './style'
@@ -172,6 +174,7 @@ const Task: React.FC<RouteComponentProps> = ({ history, location }) => {
               id: taskToSave.id,
               name: taskToSave.name,
             })
+            sortByName(topic.tasks)
             topicsToUpdate.push(topic)
           }
           if (topic.id === task.topicId) {
@@ -184,11 +187,13 @@ const Task: React.FC<RouteComponentProps> = ({ history, location }) => {
       } else if (taskToSave.name !== task.name) {
         topics.forEach((topic) => {
           if (topic.id === task.topicId) {
+            const newTasks = topic.tasks.map((tk) =>
+              tk.id !== task.id ? tk : { ...tk, name: taskToSave.name },
+            )
+            sortByName(newTasks)
             topicsToUpdate.push({
               ...topic,
-              tasks: topic.tasks.map((tk) =>
-                tk.id !== task.id ? tk : { ...tk, name: taskToSave.name },
-              ),
+              tasks: newTasks,
             })
           }
         })

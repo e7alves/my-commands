@@ -1,4 +1,5 @@
 import { Topic, Task, Command } from './dataTypes'
+import sortByName from './sortByName'
 import { TOPIC_DEFAULT_ID } from '../consts'
 
 export const listTopics = (callback: (result: Topic[]) => void) => {
@@ -37,6 +38,7 @@ export const updateTopics = (
         ...topic,
       })
     })
+    sortByName(topics)
     chrome.storage.local.set({ topics }, callback)
   })
 }
@@ -63,6 +65,7 @@ export const createTopic = (topic: Topic, callback?: () => void) => {
       chrome.storage.local.set({ topics: [topic] }, callback)
     } else {
       topics.push(topic)
+      sortByName(topics)
       chrome.storage.local.set({ topics }, callback)
     }
   })
