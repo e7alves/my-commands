@@ -42,8 +42,10 @@ const CommandField: React.FC<Props> = ({
     })
   }
 
+  const commandSplitted = command.command.split('\n')
+
   const style: React.CSSProperties = {
-    height: `${command.command.split('\n').length * 19 + 35}px`,
+    height: `${commandSplitted.length * 15.2 + 25}px`,
     overflowY: 'hidden',
   }
 
@@ -87,7 +89,7 @@ const CommandField: React.FC<Props> = ({
               ref={staticCommandFieldRef}
               onDrop={(e) => e.preventDefault()}
             >
-              {command.command.split('\n').map((str, idx) => (
+              {commandSplitted.map((str, idx) => (
                 // eslint-disable-next-line react/no-array-index-key
                 <div key={idx}>{str}</div>
               ))}
