@@ -119,7 +119,7 @@ export const getCommandsFromContextSelection = (
   callback?: (commands: string[] | Command[]) => void,
 ) => {
   chrome.storage.local.get(['contextSelectionCommands', 'link'], (result) => {
-    const { contextSelectionCommands, link } = result
+    const { contextSelectionCommands } = result
     callback && callback(contextSelectionCommands)
   })
 }
@@ -133,4 +133,18 @@ export const updateCommandsContextSelection = (
 
 export const clearCommandsContextSelection = (callback?: () => void) => {
   chrome.storage.local.set({ contextSelectionCommands: null }, callback)
+}
+
+export const setLastTopicSelected = (
+  topicId: string,
+  callback?: () => void,
+) => {
+  chrome.storage.local.set({ lastTopicSelected: topicId }, callback)
+}
+
+export const getLastTopicSelected = (callback?: (topicId: string) => void) => {
+  chrome.storage.local.get(
+    ['lastTopicSelected'],
+    ({ lastTopicSelected }) => callback && callback(lastTopicSelected),
+  )
 }

@@ -2,7 +2,12 @@ import React, { useState, useEffect, useContext } from 'react'
 
 import { LangContext } from '../../lang/langConfig'
 
-import { deleteTask, updateTopics } from '../../data/storageActions'
+import {
+  deleteTask,
+  updateTopics,
+  setLastTopicSelected,
+  getLastTopicSelected,
+} from '../../data/storageActions'
 import { TaskToSelect } from '../../data/dataTypes'
 import { TOPIC_DEFAULT_ID } from '../../consts'
 
@@ -20,7 +25,12 @@ import useQuery from '../../useQuery'
 const Tasks: React.FC = () => {
   const messages = useContext(LangContext)
 
-  const topicId = useQuery().get('topicId')
+  let topicId = useQuery().get('topicId')
+  if (!topicId) {
+    getLastTopicSelected((lastTopicSelected) => {
+      topicId = lastTopicSelected
+    })
+  }
 
   const { topics, refreshTopics } = useContext<TopicsContextType>(TopicsContext)
 
@@ -33,7 +43,7 @@ const Tasks: React.FC = () => {
 
   function onSelectChange(e: React.FormEvent<HTMLSelectElement>) {
     const topicId = e.currentTarget.value
-    setSelectedTopicId(topicId)
+    setLastTopicSelected(topicId, () => setSelectedTopicId(topicId))
   }
 
   useEffect(() => {
