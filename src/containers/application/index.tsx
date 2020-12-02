@@ -11,6 +11,7 @@ import {
   updateTheme,
   getLang,
   updateLang,
+  setWindowOptions,
 } from '../../data/storageActions'
 import themes, { themeDefault } from '../../theme/themes'
 
@@ -46,6 +47,18 @@ const Application: React.FC<RouteComponentProps> = ({ history }) => {
   useEffect(() => getTheme(({ theme }) => setTheme(theme || themeDefault)), [])
 
   useEffect(() => getLang(({ lang }) => setLang(lang || defaultLang)), [])
+
+  useEffect(() => {
+    window.addEventListener('beforeunload', (e) => {
+      e.preventDefault()
+      setWindowOptions({
+        width: window.outerWidth,
+        height: window.outerHeight,
+        screenLeft: window.screenLeft,
+        screenTop: window.screenTop,
+      })
+    })
+  }, [])
 
   function redirectToNewTask(request) {
     if (request.eventName === 'copy-by-context-menu') {

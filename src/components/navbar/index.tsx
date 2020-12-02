@@ -25,6 +25,11 @@ const Navbar: React.FC<Props> = ({ openAddTopicModal, history }) => {
             <Icon name="chevron-left" fontSize="20px" />
           </TransparentBtn>
         </li>
+        <li style={{ minWidth: 0, padding: '0 2px' }}>
+          <TransparentBtn onClick={history.goForward}>
+            <Icon name="chevron-right" fontSize="20px" />
+          </TransparentBtn>
+        </li>
         <li>
           <Navlink
             to="/tasks"
@@ -70,11 +75,6 @@ const Navbar: React.FC<Props> = ({ openAddTopicModal, history }) => {
             <Icon name="cog" />
             {messages['label.settings']}
           </Navlink>
-        </li>
-        <li style={{ minWidth: 0, padding: '0 2px' }}>
-          <TransparentBtn onClick={history.goForward}>
-            <Icon name="chevron-right" fontSize="20px" />
-          </TransparentBtn>
         </li>
       </ul>
     </StyledNavbar>

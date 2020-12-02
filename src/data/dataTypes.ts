@@ -26,3 +26,10 @@ export interface Topic {
   name: string
   tasks: TaskToSelect[]
 }
+
+export interface WindowOptions {
+  width: number
+  height: number
+  screenLeft: number
+  screenTop: number
+}

@@ -1,4 +1,4 @@
-import { Topic, Task, Command } from './dataTypes'
+import { Topic, Task, Command, WindowOptions } from './dataTypes'
 import sortByName from './sortByName'
 import { TOPIC_DEFAULT_ID } from '../consts'
 
@@ -150,4 +150,8 @@ export const getLastTopicSelected = (callback?: (topicId: string) => void) => {
     ['lastTopicSelected'],
     ({ lastTopicSelected }) => callback && callback(lastTopicSelected),
   )
+}
+
+export const setWindowOptions = (windowOptions: WindowOptions) => {
+  chrome.storage.local.set({ windowOptions })
 }

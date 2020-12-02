@@ -12,21 +12,40 @@ function onWindowClosedOrOpenedHandler(onWindowClosed, onWindowOpened) {
 }
 
 const createNewWindow = (url, callback) => {
-  const width = 500
-  chrome.windows.create(
-    {
-      url: chrome.runtime.getURL(url),
-      type: 'popup',
-      width,
-      height: window.screen.height,
-      left: window.screen.width - width - 5,
-      top: 0,
-    },
-    (window) => {
-      windowId = window.id
-      callback && callback()
-    },
-  )
+  chrome.storage.local.get(['windowOptions'], ({ windowOptions }) => {
+    const defaultWidth = 500
+    const defaultHeight = window.screen.height
+    const defaultTop = 0
+    const width = windowOptions
+      ? windowOptions.width || defaultWidth
+      : defaultWidth
+    const height = windowOptions
+      ? windowOptions.height || defaultHeight
+      : defaultHeight
+    const top = windowOptions
+      ? windowOptions.screenTop || defaultTop
+      : defaultTop
+
+    const defaultLeft = window.screen.width - width - 5
+    const left = windowOptions
+      ? windowOptions.screenLeft || defaultLeft
+      : defaultLeft
+
+    chrome.windows.create(
+      {
+        url: chrome.runtime.getURL(url),
+        type: 'popup',
+        width,
+        height,
+        left,
+        top,
+      },
+      (window) => {
+        windowId = window.id
+        callback && callback()
+      },
+    )
+  })
 }
 
 chrome.browserAction.onClicked.addListener(() => {
