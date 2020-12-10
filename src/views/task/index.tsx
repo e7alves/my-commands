@@ -216,6 +216,7 @@ const Task: React.FC<RouteComponentProps> = ({ history, location }) => {
         topics={topics}
         taskInfo={taskInfoCopy}
         setTaskInfo={(newTaskInfo) => setTaskInfoCopy(newTaskInfo)}
+        history={history}
       />
       <Container>
         {!editMode && (
