@@ -17,6 +17,7 @@ interface Props {
   iconName?: string
   backgroundColor?: string
   type?: string
+  tabIndex?: string
 }
 
 const buttonFactory: (unknow) => React.FC<Props> = (

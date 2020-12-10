@@ -35,6 +35,7 @@ const TextField: React.FC<Props> = ({
       }}
       autoFocus={autoFocus}
       autoComplete="off"
+      spellCheck="false"
     />
   </Wrapper>
 )

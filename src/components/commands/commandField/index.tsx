@@ -64,18 +64,21 @@ const CommandField: React.FC<Props> = ({
             <SquaredBtn
               style={{ marginBottom: '10px' }}
               onClick={() => onDelete(index)}
+              tabIndex="-1"
             >
               <Icon name="close" />
             </SquaredBtn>
             <SquaredBtn
               style={{ marginBottom: '10px' }}
               onClick={() => onChangePosition(index, true)}
+              tabIndex="-1"
             >
               <Icon name="chevron-up" />
             </SquaredBtn>
             <SquaredBtn
               style={{ marginBottom: '10px' }}
               onClick={() => onChangePosition(index, false)}
+              tabIndex="-1"
             >
               <Icon name="chevron-down" />
             </SquaredBtn>
