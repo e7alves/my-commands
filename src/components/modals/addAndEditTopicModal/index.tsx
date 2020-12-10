@@ -46,6 +46,7 @@ const AddAndEditTopicModal: React.FC<Props> = ({
             value={topicName}
             onChange={onTextChange}
             onKeyDown={onClickButton}
+            autoFocus
           />
         </TextFieldWrapper>
         <ButtonsPanel>

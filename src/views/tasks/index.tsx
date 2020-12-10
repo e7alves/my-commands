@@ -25,12 +25,7 @@ import useQuery from '../../useQuery'
 const Tasks: React.FC = () => {
   const messages = useContext(LangContext)
 
-  let topicId = useQuery().get('topicId')
-  if (!topicId) {
-    getLastTopicSelected((lastTopicSelected) => {
-      topicId = lastTopicSelected
-    })
-  }
+  const topicId = useQuery().get('topicId')
 
   const { topics, refreshTopics } = useContext<TopicsContextType>(TopicsContext)
 
@@ -40,6 +35,12 @@ const Tasks: React.FC = () => {
   const [tasks, setTasks] = useState<TaskToSelect[]>(null)
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
   const [taskToDelete, setTaskToDelete] = useState<TaskToSelect>(null)
+
+  useEffect(() => {
+    getLastTopicSelected((lastTopicSelected) => {
+      lastTopicSelected && setSelectedTopicId(lastTopicSelected)
+    })
+  }, [])
 
   function onSelectChange(e: React.FormEvent<HTMLSelectElement>) {
     const topicId = e.currentTarget.value
