@@ -39,7 +39,7 @@ const CommandDescription: React.FC<Props> = ({
       return showDescription || description ? (
         <EditableDescription value={description} onChange={onChangeHandler} />
       ) : (
-        <TextBtn onClick={() => setShowDescription(true)}>
+        <TextBtn onClick={() => setShowDescription(true)} tabIndex="-1">
           {messages['label.addDescription']}
         </TextBtn>
       )

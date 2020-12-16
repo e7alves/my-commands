@@ -1,4 +1,5 @@
 import React, { useContext, useMemo } from 'react'
+import { History } from 'history'
 
 import { LangContext } from '../../lang/langConfig'
 
@@ -10,12 +11,14 @@ import TextField from '../inputs/textField'
 import SelectBox from '../inputs/selectBox'
 import Label from '../inputs/label'
 import { Link } from '../links'
+import { IconBtn } from '../buttons'
 
 interface Props {
   editMode: boolean
   topics: Topic[]
   taskInfo: TaskInfo
   setTaskInfo: (newTaskInfo: TaskInfo) => void
+  history: History
 }
 
 const TaskHeader: React.FC<Props> = ({
@@ -23,6 +26,7 @@ const TaskHeader: React.FC<Props> = ({
   topics,
   taskInfo,
   setTaskInfo,
+  history,
 }) => {
   const messages = useContext(LangContext)
 
@@ -93,7 +97,11 @@ const TaskHeader: React.FC<Props> = ({
           <>
             <HorizInputSection>
               {renderLabel('Topic')}
-              <p>{topicName}</p>
+              <p style={{ marginRight: '0.4rem' }}>{topicName}</p>
+              <IconBtn
+                iconName="open-in-new"
+                onClick={() => history.push(`/tasks?topicId=${topicId}`)}
+              />
             </HorizInputSection>
             <HorizInputSection>
               {renderLabel('Task')}

@@ -22,7 +22,7 @@ const Command = css`
   max-width: 100%;
   min-width: 100%;
   overflow-y: hidden;
-  padding: 12px 0 12px 12px;
+  padding: 12px;
   width: 100%;
   span {
     color: ${({ theme }) => theme.text2};

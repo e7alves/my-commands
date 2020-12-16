@@ -42,7 +42,12 @@ const AddAndEditTopicModal: React.FC<Props> = ({
     <Modal isOpen={isOpen} title={title} height="120px" close={close}>
       <ModalContent>
         <TextFieldWrapper>
-          <TextField value={topicName} onChange={onTextChange} />
+          <TextField
+            value={topicName}
+            onChange={onTextChange}
+            onKeyDown={onClickButton}
+            autoFocus
+          />
         </TextFieldWrapper>
         <ButtonsPanel>
           <CancelBtn onClick={close} style={{ marginLeft: '0.2rem' }}>

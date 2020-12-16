@@ -42,7 +42,7 @@ export default {
     navbarBg: '#e6e6e6',
     taskHeaderBg: '#eeeeee',
     commandAreaBg: '#f9f9f9',
-    commandDescriptionAreaBg: '#f0f0f0',
+    commandDescriptionAreaBg: '#e8e8e8',
     commandTextColor: '#000',
     inputBorderColor: '#3b4d54',
     readModeCommandBorderColor: '#0069B8',
