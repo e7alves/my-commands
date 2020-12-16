@@ -21,6 +21,8 @@ export default {
     'label.save': 'Save',
     'label.addDescription': 'Add description',
     'label.alert': 'Alert',
+    'label.window': 'Window',
+    'label.resetWindowOptions': 'Reset position',
     'text.deleteTaskAlert': 'Are you sure you want to delete this task?',
     'text.deleteTopicAlert': 'Are you sure you want to delete this topic?',
     'text.importDataAlert':
@@ -49,6 +51,8 @@ export default {
     'label.save': 'Salvar',
     'label.addDescription': 'Inserir descrição',
     'label.alert': 'Atenção',
+    'label.window': 'Janela',
+    'label.resetWindowOptions': 'Restaurar posição',
     'text.deleteTaskAlert': 'Tem certeza que deseja excluir esta tarefa?',
     'text.deleteTopicAlert': 'Tem certeza que deseja excluir este tópico?',
     'text.importDataAlert':

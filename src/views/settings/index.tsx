@@ -7,6 +7,8 @@ import { getDataToExport, clearData } from '../../data/storageActions'
 import { exportFileName } from '../../consts'
 import { langs, LangContext } from '../../lang/langConfig'
 
+import windowDefaultOptions from '../../data/windowDefaultOptions'
+
 import { Container, Section } from './style'
 import { HorizInputSection } from '../../components/inputs/style'
 import Label from '../../components/inputs/label'
@@ -86,6 +88,12 @@ const Settings: React.FC<Props> = ({
     })
   }
 
+  function onResetWindowOptions() {
+    const { width, height, screenLeft, screenTop } = windowDefaultOptions
+    window.resizeTo(width, height)
+    window.moveTo(screenLeft, screenTop)
+  }
+
   const labelWidth = '3.5rem'
   return (
     <>
@@ -155,6 +163,19 @@ const Settings: React.FC<Props> = ({
                 {messages['label.clearData']}
               </SecondaryBtn>
             </HorizInputSection>
+          </HorizInputSection>
+        </Section>
+        <Section>
+          <HorizInputSection>
+            <Label style={{ width: labelWidth }}>
+              {messages['label.window']}
+            </Label>
+            <SecondaryBtn
+              iconName="window-restore"
+              onClick={onResetWindowOptions}
+            >
+              {messages['label.resetWindowOptions']}
+            </SecondaryBtn>
           </HorizInputSection>
         </Section>
       </Container>
