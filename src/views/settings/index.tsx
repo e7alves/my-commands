@@ -131,7 +131,7 @@ const Settings: React.FC<Props> = ({
             </Label>
             <HorizInputSection>
               <SecondaryBtn
-                iconName="download"
+                iconName="export"
                 style={{
                   border: `1px solid ${theme.secondaryButtonBg}`,
                 }}
@@ -140,7 +140,7 @@ const Settings: React.FC<Props> = ({
                 {messages['label.export']}
               </SecondaryBtn>
               <SecondaryBtn
-                iconName="upload"
+                iconName="import"
                 style={{
                   marginLeft: '1rem',
                   border: `1px solid ${theme.secondaryButtonBg}`,
