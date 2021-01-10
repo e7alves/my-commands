@@ -118,7 +118,7 @@ const Settings: React.FC<Props> = ({
               {messages['label.theme']}
             </Label>
             <Radios
-              options={['Dark', 'Light']}
+              options={['dark', 'light']}
               onChange={(theme) => updateTheme(theme)}
               value={currentTheme}
             />
