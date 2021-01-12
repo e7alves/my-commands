@@ -29,7 +29,7 @@ module.exports = () => ({
       './src/assets/index.html',
       path.join(__dirname, packageInfo.browser),
     ],
-    images: [path.join(__dirname, 'src/assets/favicon.png')],
+    images: [path.join(__dirname, 'src/extension-resources/icon48.png')],
   },
 
   watchOptions: {
