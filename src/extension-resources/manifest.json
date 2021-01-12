@@ -1,11 +1,12 @@
 {
   "name": "My commands",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "My commands is a tool created for terminal users to store and organize frequently used commands",
   "permissions": [
     "activeTab",
     "storage",
-    "contextMenus"
+    "contextMenus",
+    "unlimitedStorage"
   ],
   "browser_action": {
       "default_title": "My commands",
