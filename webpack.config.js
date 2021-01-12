@@ -62,6 +62,8 @@ module.exports = () => ({
         { from: './src/extension-resources/background.js', to: '' },
         { from: './src/extension-resources/content.js', to: '' },
         { from: './src/extension-resources/icon16.png', to: '' },
+        { from: './src/extension-resources/icon48.png', to: '' },
+        { from: './src/extension-resources/icon128.png', to: '' },
       ],
     }),
   ],

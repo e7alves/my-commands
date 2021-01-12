@@ -93,7 +93,11 @@ chrome.runtime.onMessage.addListener((request) => {
 })
 
 function onClickHandler() {
-  chrome.tabs.executeScript({ file: 'content.js' })
+  chrome.tabs.executeScript({ file: 'content.js' }, () => {
+    if (chrome.runtime.lastError) {
+      console.log('not applicable in this context')
+    }
+  })
 }
 
 chrome.contextMenus.onClicked.addListener(onClickHandler)
