@@ -12,7 +12,7 @@ My commands is a tool created for developers and distributed as an extension to 
 </h3>
 
 <h1 align="center">
-	<img width="70px" src="https://lh3.googleusercontent.com/-Q38P17oxMpL1NJMI4UwnsN_vRZGc9G-8XafhqP-cCv7XfiY1Tw5czP_4kZ6XDEXLH1GrGaZrx3AyNK8RImHVzyj=w640-h400-e365-rj-sc0x00ffffff" alt="My commands chrome extension screenshot" />
+	<img width="100%" src="https://raw.githubusercontent.com/e7alves/my-commands/main/src/assets/screenshot.png?raw=true" alt="My commands chrome extension screenshot" />
 </h1>
 
 ## Application features
