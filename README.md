@@ -1,5 +1,4 @@
 # my-commands
-My commands is a tool created for terminal users to store and organize frequently used commands.
 <h1 align="center">
 	<img width="70px" src="https://lh3.googleusercontent.com/Q9DoTgdI0iQDiL3wvOpQlmEeYjYyu2aQ-kXaiZo0eCltjEwGKic0EZfeJPnjcFWg5UEMLmCxQzlPEdDUcd3QJYI6=w128-h128-e365-rj-sc0x00ffffff" alt="My commands chrome extension logo" />
 </h1>
