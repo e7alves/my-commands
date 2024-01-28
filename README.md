@@ -1,13 +1,13 @@
 # my-commands
 <h1 align="center">
-	<img width="70px" src="https://chromewebstore.google.com/detail/my-commands/pmpalmbkgleakdbnjnbigjndfophkgca" alt="My commands chrome extension logo" />
+	<img width="70px" src="https://lh3.googleusercontent.com/Q9DoTgdI0iQDiL3wvOpQlmEeYjYyu2aQ-kXaiZo0eCltjEwGKic0EZfeJPnjcFWg5UEMLmCxQzlPEdDUcd3QJYI6=w128-h128-e365-rj-sc0x00ffffff" alt="My commands chrome extension logo" />
 </h1>
 
 ## Description
 My commands is a tool created for developers and distributed as an extension to the Chrome browser that allows you to store and organize frequently used commands and codes.
 
 <h3>
-  <a href="https://chrome.google.com/webstore/detail/my-commands/pmpalmbkgleakdbnjnbigjndfophkgca" rel="nofollow">Click here to install for free</a>
+  <a href="https://chromewebstore.google.com/detail/my-commands/pmpalmbkgleakdbnjnbigjndfophkgca" rel="nofollow">Click here to install for free</a>
 </h3>
 
 <h1 align="center">
